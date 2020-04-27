@@ -14,9 +14,31 @@ When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
 $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
 <script type="text/tikz">
   \begin{tikzpicture}
-    \draw (0,0) circle (1in);
-  \end{tikzpicture}
-</script>
+     \filldraw[fill=blue!20, draw=blue!60] (-1.5,0) circle (1.2cm);
+     \filldraw[fill=red!20, draw=red!60] (1.5,0) circle (1.2cm);
 
+
+
+     \node at (-1.5,1.5) {$A$};
+     \node at (1.5,1.5) {$B$};
+
+
+     \node (x1) at (-1.5,0.9) {$a$};
+     \node (x2) at (-1.5,0.4) {$b$};
+     \node (x3) at (-1.5,-0.1) {$c$};
+     \node (x4) at (-1.5,-0.5) {$d$};
+     \node (y1) at (1.5,0.9) {$1$};
+     \node (y2) at (1.5,0.4) {$2$};
+     \node (y3) at (1.5,-0.1) {$3$};
+     \node (y4) at (1.5,-0.5) {$4$};
+     \node (y5) at (1.5,-0.9) {$5$};
+
+  
+    \draw[->] (x1) -- (y1);
+    \draw[->] (x2) -- (y2);
+    \draw[->] (x3) -- (y3);
+    \draw[->] (x4) -- (y4);
+  \end{tikzpicture}
+</script> 
 </body>
 </html>
