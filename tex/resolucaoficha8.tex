@@ -1,0 +1,524 @@
+% !TeX program = lualatex
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{cancel}
+\usepackage[portuguese]{babel}
+\usepackage{fancybox}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{polynom}
+\usepackage{adjustbox}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{matrix}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.pathreplacing}
+
+\tikzset{
+	CE/.style={column #1/.style={nodes={text width=29mm}}}
+}
+\tikzset{
+	CA/.style={column #1/.style={nodes={text width=35mm}}}
+}
+
+\usepackage{luacode}
+\begin{luacode}
+	-- Computes the roots of x^2+bx+c=0
+	-- Returns nothing if they aren't real
+	function roots(b, c)
+	local delta = b*b-4*c
+	if delta > 0 then
+	deltasq = math.sqrt(delta)
+	local r1 = math.round((-b-deltasq)/2)
+	local r2 = math.round((-b+deltasq)/2)
+	return r1, r2
+	end
+	end
+	
+	-- Outputs x^2+bx+c in developed form to LaTeX
+	function display_polynome(b, c)
+	p = "x^2"
+	if b > 0 then
+	p = p .. "+" .. tostring(b) .. "x"
+	elseif b < 0 then
+	p = p .. tostring(b) .. "x"
+	end
+	if c > 0 then
+	p = p .. "+" .. tostring(c)
+	elseif c < 0 then
+	p = p .. tostring(c)
+	end
+	tex.print(p)
+	end
+	
+	-- Outputs x^2+bx+c in factorized form to LaTeX
+	function display_factorized_polynom(b, c) 
+	r1, r2 = roots(b, c)
+	p = "(x"
+	if r1 > 0 then
+	p = p .. "-" .. tostring(r1) .. ")(x"
+	elseif r1 < 0 then
+	p = p .. "+" .. tostring(-r1) .. ")(x"
+	end
+	if r2 > 0 then
+	p = p .. "-" .. tostring(r2) .. ")"
+	elseif r2 < 0 then
+	p = p .. "+" .. tostring(-r2) .. ")"
+	end
+	tex.print(p)
+	end
+\end{luacode}
+
+\begin{document}
+	
+	\section*{Exercício 1}\textbf{Considere a função quadrática definida por $f(x) = x^2 - 2x - 3$, $x \in \mathbb{R}$.}
+\subsection*{a)}
+\textbf{Escreva a expressão $x^2 -2x - 3$ na forma $\left(x- h\right)^2 + k$.}
+\[h=-\frac{b}{2a}=\frac{2}{2}=1\]\
+\[k=-\frac{\Delta}{4a}\]
+\[\Delta=16, \text{então},  k=-\frac{16}{4}=-4\]
+\text{Então a expressão $x^2 -2x - 3$ é equivalente a $\left(x - 1\right)^2 - 4$.}
+\subsection*{b)}
+\textbf{Calcule os zeros de $\it{f}$.}
+\[x=\frac{2\pm\sqrt{16}}{2}\]
+\[\Leftrightarrow x=\frac{2\pm4}{2}\]
+\[\Leftrightarrow x=3 \lor x=-1\]
+\text{Os zeros de $x^2 -2x - 3$ são $-1,3.	$}
+
+\subsection*{c)}\textbf{Represente graficamente $\it{f}$.}
+
+	\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-5,-4,...,5},
+		ytick={-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below right},
+		ylabel style={above left},
+		xmin=-5.5,
+		xmax=8,
+		ymin=-5.5,
+		ymax=5.5]
+		\addplot[domain=-2:4] {(\x-1)^2-4};
+		\draw[dashed] (axis cs:1,0) -- (axis cs:1,-4) -- (axis cs:0,-4);
+		\addplot[mark=*] coordinates {(1,-4)};
+	\end{axis}
+\end{tikzpicture}
+
+\subsection*{d)}\textbf{Indique os valores de x que têm imagem negativa.}
+
+	\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-5,-4,...,5},
+		ytick={-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below right},
+		ylabel style={above left},
+		xmin=-5.5,
+		xmax=8,
+		ymin=-5.5,
+		ymax=5.5]
+		\addplot[domain=-1:3] {(\x-1)^2-4};
+		\addplot[name path = parab, domain=-1:3] {(\x-1)^2-4};
+        \addplot[name path = floor, draw = none] coordinates {(-2,0) (5,0)};
+        \addplot[color=gray,opacity=0.5] fill between[of = parab and floor, soft clip={domain = -1:3}];
+		\addplot[mark=*] coordinates {(1,-4)};
+	\end{axis}
+\end{tikzpicture}
+
+\text{$C.S.=\left]-1,3\right[$}
+
+\section*{Exercício 2}\textbf{Considere a função real de variável real definida por $f(x) = -(x + 2)^2 - 1, x \in \mathbb{R}$.}
+
+\subsection*{a)}\textbf{Determine as coordenadas do vértice da parábola representativa do gráfico da função e escreva uma equação do seu eixo de simetria.}
+
+\text{As coordenadadas do $V=(-2,-1)$ e equação do eixo de simetria é $x=-2$}
+\subsection*{b)}\textbf{Indique dois objetos diferentes que tenham a mesma imagem por $\it{f}$.}
+\[\{1,-10\}\]
+\[\{-5,-10\}\]
+\subsection*{c)}\textbf{Qual o sentido da concavidade da parábola? Justifique.}
+
+\text{A concavidade da parábola é voltada para baixo porque o coeficiente x ou seja é menor que zero.}
+
+\subsection*{d)}\textbf{Represente graficamente $\it{f}$.}
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-6,-5,-4,...,5},
+		ytick={-6,-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below left},
+		ylabel style={above left},
+		xmin=-7,
+		xmax=8,
+		ymin=-7,
+		ymax=8]
+		\addplot[domain=-5:4] {-(\x+2)^2-1};
+		\draw[dashed] (axis cs:-2,0) -- (axis cs:-2,-1) -- (axis cs:0,-1);
+		\addplot[mark=*] coordinates {(-2,-1)};
+	\end{axis}
+\end{tikzpicture}
+\subsection*{e)}\textbf{Indique o seu contradomínio.}
+\[D'_{f}=\left]-\infty,-1\right]\]
+
+\section*{Exercício 3}\textbf{Resolva em R cada uma das condições:}
+\subsection*{a)}\textbf{$9x^2 + 12x + 4 \leq 0$;}
+\text{C.A.}
+\[9x^2 + 12x + 4 = 0\]
+\[\Leftrightarrow x=\frac{-12\pm\sqrt{0}}{18}\]
+\[\Leftrightarrow x=\frac{-12}{18}\]
+\[\Leftrightarrow x=-\frac{2}{3}\]
+\[S=-\frac{2}{3}\]
+\[9x^2 + 12x + 4 \leq 0 = -\frac{2}{3}\]
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-6,-5,-4,...,5},
+		ytick={-6,-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below left},
+		ylabel style={above left},
+		xmin=-7,
+		xmax=8,
+		ymin=-7,
+		ymax=8]
+		\addplot[smooth,thick,domain=-5:1] {9*(\x+(2/3))^2};
+		\addplot[mark=*] coordinates {(-(2/3),0)};
+	\end{axis}
+\end{tikzpicture}
+
+\subsection*{b)}\textbf{$-x^2 + 4 < 0$;}
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-6,-5,-4,...,5},
+		ytick={-6,-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below left},
+		ylabel style={above left},
+		xmin=-7,
+		xmax=8,
+		ymin=-7,
+		ymax=8]
+		\addplot[smooth,thick,domain=-6:6] {-(\x)^2+4};
+		\addplot[mark=*] coordinates {(-2,0)};
+		\addplot[mark=*] coordinates {(2,0)};
+	\end{axis}
+\end{tikzpicture}
+\[C.S.=\left]-\infty,-2\right[\cup\left]2,+\infty\right[\]
+
+\subsection*{c)}\textbf{$-x^2 - 5x \geq 6$;}
+
+\text{C.A.}
+
+\[-x^2 - 5x - 6 = 0\]
+\[\Leftrightarrow x=\frac{5\pm 1}{-2}\]
+\[\Leftrightarrow x=\frac{5+1}{-2} \lor x=\frac{5-1}{-2}\]
+\[\Leftrightarrow x=-3 \lor x=-2\]
+\[S=\{-3,-2\}\]
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-6,-5,-4,...,5},
+		ytick={-6,-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below left},
+		ylabel style={above left},
+		xmin=-7,
+		xmax=8,
+		ymin=-7,
+		ymax=8]
+		\addplot[smooth,thick,domain=-6:6] {-(\x)^2-5*x-6};
+		\addplot[mark=*] coordinates {(-3,0)};
+		\addplot[mark=*] coordinates {(-2,0)};
+	\end{axis}
+\end{tikzpicture}
+
+\[-x^2 - 5x \geq 6 =  \left[-3,-2\right]\]
+~
+\subsection*{d)}\textbf{$x^2 + x - 2 > 0$;}
+
+\text{C.A.}
+
+\[x^2 + x - 2 = 0\]
+\[\Leftrightarrow x=\frac{-1\pm 3}{2}\]
+\[\Leftrightarrow x=\frac{-1+3}{2} \lor x=\frac{-1-3}{2}\]
+\[\Leftrightarrow x=1 \lor x=-2\]
+\[S=\{-2,1\}\]
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-6,-5,-4,...,5},
+		ytick={-6,-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below left},
+		ylabel style={above left},
+		xmin=-7,
+		xmax=8,
+		ymin=-7,
+		ymax=8]
+		\addplot[smooth,thick,domain=-6:6] {(\x)^2+x-2};
+		\addplot[mark=*] coordinates {(1,0)};
+		\addplot[mark=*] coordinates {(-2,0)};
+	\end{axis}
+\end{tikzpicture}
+
+\[x^2 + x - 2 > 0 = \left]-\infty,-2\right[\cup\left]1,+\infty\right[\]
+
+\subsection*{e)}\textbf{$4x^2 + x + 1 < 0$;}
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-6,-5,-4,...,5},
+		ytick={-6,-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below left},
+		ylabel style={above left},
+		xmin=-7,
+		xmax=8,
+		ymin=-7,
+		ymax=8]
+		\addplot[smooth,thick,domain=-6:6] {4*(\x)^2+x+1};
+	\end{axis}
+\end{tikzpicture}
+
+\text{O $\Delta<0$, portanto não tem zeros e como a concavidade é virada para cima não toca o eixo do x.}
+
+
+\section*{Exercício 4}\textbf{Determine o domínio das funções definidas por :}
+\subsection*{a)}\textbf{$f(x)=\sqrt{2x^2 - 4x}$}
+
+\text{C.A.}
+\[2x^2 - 4x=0\]
+\[\Leftrightarrow x\left(2x-4\right)=0\]
+\[\Leftrightarrow x=0 \lor x=2\]
+\[D_{f}=\left]-\infty,0\right]\cup\left[2,+\infty\right[\]
+
+\begin{tikzpicture}
+	%\matrix[matrix of math nodes,
+	%nodes in empty cells,
+	%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+	%row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	\matrix[matrix of math nodes,
+	nodes in empty cells,
+	nodes={text width=1cm,minimum height=8mm,anchor=north east, text centered}, 
+	row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	{
+		& & & & & & &  \\
+		& & & & & & &  \\
+		& & & & & & &  \\
+		& & & & & & &  \\
+	};
+	\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-6.north east) |- cycle;
+	\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-4-6.south east);
+	\draw[ultra thick] (S-1-1.south west) -- (S-1-6.south east);
+	\draw (S-2-1.south west) -- (S-2-6.south east);
+	\draw (S-3-1.south west) -- (S-3-6.south east);
+	\foreach \i in{1,...,6}{
+		\draw (S-1-\i.north east) -- (S-4-\i.south east);
+		\node at (S-1-1) {$x$};
+		\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+		\node[anchor=east] at (S-1-6.east) {\(+\infty\)};
+		\node at (S-1-3) {\(0\)};
+		\node at (S-1-5) {\(2\)};
+		\node at (S-2-1) {\(x\)};
+		\node at (S-3-1) {\(2x-4\)};
+		\node at (S-2-2) {\(-\)};
+		\node at (S-3-2) {\(-\)};
+		\node at (S-2-3) {\(0\)};
+		\node at (S-3-3) {\(-\)};
+		\node at (S-3-6) {\(+\)};
+		\node at (S-2-4) {\(+\)};
+		\node at (S-3-4) {\(-\)};
+		\node at (S-2-5) {\(+\)};
+		\node at (S-2-6) {\(+\)};
+		\node at (S-3-5) {\(0\)};
+		\node at (S-4-1) {\(\left(x\right)\left(2x-4\right)\)};
+		\node at (S-4-2) {\(+\)};
+		\node at (S-4-3) {\(0\)};
+		\node at (S-4-4) {\(-\)};
+		\node at (S-4-5) {\(0\)};
+		\node at (S-4-6) {\(+	\)};
+	}
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-2.south west) to node[midway,fill opacity=1,below]{Crescente} (S-4-3.south east);
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-5.south west) to node[midway,fill opacity=1,below]{Crescente} (S-4-6.south east);
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-6,-5,-4,...,5},
+		ytick={-6,-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below left},
+		ylabel style={above left},
+		xmin=-7,
+		xmax=8,
+		ymin=-7,
+		ymax=8]
+		\addplot[smooth,thick,domain=-6:6] {2*(\x)^2-4*(\x))^(0.5)};
+		\addplot[mark=*] coordinates {(2,0)};
+		\addplot[mark=*] coordinates {(0,0)};
+	\end{axis}
+\end{tikzpicture}
+
+\subsection*{b)}\textbf{$f(x)=\frac{x}{\sqrt{\left(x-1\right)\left(x-2\right)}}$}
+\[D_{f}=\{x \in \mathbb{R}:\left(x-1\right)\left(x-2\right)>0\}\]
+
+\text{C.A.}
+\[\left(x-1\right)\left(x-2\right)=0\]
+\[\Leftrightarrow x=1 \lor x=2\]
+\[D_{f}=\left]-\infty,1\right[\cup\left]2,+\infty\right[\]
+
+\begin{tikzpicture}
+	%\matrix[matrix of math nodes,
+	%nodes in empty cells,
+	%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+	%row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	\matrix[matrix of math nodes,
+	nodes in empty cells,
+	nodes={text width=1cm,minimum height=8mm,anchor=north east, text centered}, 
+	row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	{
+		& & & & & & &  \\
+		& & & & & & &  \\
+		& & & & & & &  \\
+		& & & & & & &  \\
+	};
+	\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-6.north east) |- cycle;
+	\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-4-6.south east);
+	\draw[ultra thick] (S-1-1.south west) -- (S-1-6.south east);
+	\draw (S-2-1.south west) -- (S-2-6.south east);
+	\draw (S-3-1.south west) -- (S-3-6.south east);
+	\foreach \i in{1,...,6}{
+		\draw (S-1-\i.north east) -- (S-4-\i.south east);
+		\node at (S-1-1) {$x$};
+		\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+		\node[anchor=east] at (S-1-6.east) {\(+\infty\)};
+		\node at (S-1-3) {\(1\)};
+		\node at (S-1-5) {\(2\)};
+		\node at (S-2-1) {\(x-1\)};
+		\node at (S-3-1) {\(x-2\)};
+		\node at (S-2-2) {\(-\)};
+		\node at (S-3-2) {\(-\)};
+		\node at (S-2-3) {\(0\)};
+		\node at (S-3-3) {\(-\)};
+		\node at (S-3-6) {\(+\)};
+		\node at (S-2-4) {\(+\)};
+		\node at (S-3-4) {\(-\)};
+		\node at (S-2-5) {\(+\)};
+		\node at (S-2-6) {\(+\)};
+		\node at (S-3-5) {\(0\)};
+		\node at (S-4-1) {\(\left(x-1\right)\left(x-2\right)\)};
+		\node at (S-4-2) {\(+\)};
+		\node at (S-4-3) {\(0\)};
+		\node at (S-4-4) {\(-\)};
+		\node at (S-4-5) {\(0\)};
+		\node at (S-4-6) {\(+	\)};
+	}
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-2.south west) to node[midway,fill opacity=1,below]{Crescente} (S-4-3.south east);
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-5.south west) to node[midway,fill opacity=1,below]{Crescente} (S-4-6.south east);
+\end{tikzpicture}
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-6,-5,-4,...,5},
+		ytick={-6,-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below left},
+		ylabel style={above left},
+		xmin=-7,
+		xmax=8,
+		ymin=-7,
+		ymax=8]
+			\addplot[smooth,thick,domain=-6:6]{x/(((\x)-1)*((\x)-2))^(0.5)};
+		\addplot[mark=*] coordinates {(1,0)};
+		\addplot[mark=*] coordinates {(2,0)};
+	\end{axis}
+\end{tikzpicture}
+\section*{Exercı́cio 5}
+\subsection*{a)}
+\[f(x)=\begin{cases}
+	\text{$2x-x^2$, se $x \leq 2$}\\ 
+	\text{$x$, se  $x > 2$}
+\end{cases}\]
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-7,-6,-5,-4,...,5,6},
+		ytick={-7,-6,-5,-4,...,5,6},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below right},
+		ylabel style={above left},
+		xmin=-6.5,
+		xmax=8,
+		ymin=-6.5,
+		ymax=6.5]
+		\addplot[domain=-5:2] {2*(\x)-(\x)^2};
+		\addplot[domain=2:5] {(\x)};
+		\draw[dashed] (axis cs:2,0) -- (axis cs:2,2) -- (axis cs:0,2);
+		\addplot[mark=*] coordinates {(2,0)};
+		\addplot[mark=*,fill=white] coordinates {(2,2)};
+	\end{axis}
+\end{tikzpicture}
+
+\subsection*{b)}
+\[g(x)=|x^2-4|\]
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-7,-6,-5,-4,...,5,6},
+		ytick={-7,-6,-5,-4,...,5,6},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below right},
+		ylabel style={above left},
+		xmin=-6.5,
+		xmax=8,
+		ymin=-6.5,
+		ymax=6.5]
+		\addplot[domain=-5:5] {abs((\x)^2-4))};
+		\addplot[mark=*] coordinates {(2,0)};
+		\addplot[mark=*] coordinates {(-2,0)};
+		\addplot[mark=*] coordinates {(0,4)};
+	\end{axis}
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,119 @@
+\documentclass{article}
+\usepackage{xcolor}
+\usepackage{soulutf8}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{stix}
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+\newcommand\textbracketred[2]{$\color{red}\underbracket{\text{\color{black}#1}}_{\text{\color{black}#2}}$}
+\newcommand\textbracketgreen[2]{$\color{green}\underbracket{\text{\color{black}#1}}_{\text{\color{black}#2}}$}
+
+\newcommand\itemcolor[1]{\item[\textcolor{blue}#1]}
+\setulcolor{green} 
+\begin{document}
+	\begin{tikzpicture} 
+		\node[rectangle, thick, dotted, draw=blue] (a) at (0,0) {\parbox{50cm}{
+				\begin{itemize}
+					\itemcolor{a.}Levo o meu cão a passear, \ul{mesmo que} esteja a chover.
+					
+					Levo o meu cão a passear, \textbracketred{mesmo que}{concessiva} esteja a chover.
+					
+					\itemcolor{b.}Vou passar o fim de semana na praia, \ul{a não ser que} chova muito.
+					
+					Vou passar o fim de semana na praia, \textbracketred{a não ser que}{concessiva} chova muito.
+					
+					\itemcolor{c.}A mão pediu-me \ul{para} fechar as janelas.
+					
+					A mão pediu-me \textbracketred{para}{final} fechar as janelas.
+					
+					\itemcolor{d.}Este tanto calor \ul{que} o alcatrão derreteu.
+					
+					Este tanto calor \textbracketred{que}{consecutiva} o alcatrão derreteu.
+					
+					\itemcolor{e.}Tenho de correr, \ul{visto que} já estou atrasado.
+					
+					Tenho de correr, \textbracketred{visto que}{causal} já estou atrasado.
+					
+					\itemcolor{f.}Vou limpar o jardim \ul{antes que} anoiteça.
+					
+					Vou limpar o jardim \textbracketred{antes que}{temporal} anoiteça.					
+					
+					\itemcolor{g.}Tenho de decorar o meu papel, \ul{de modo a que} a peça corra bem.
+					
+					Tenho de decorar o meu papel, \textbracketred{de modo a que}{consecutiva} a peça corra bem.
+					
+					\itemcolor{h.}\ul{Assim como} eu adoro o meu cão, \ul{assim também} ele retribui com gestos carinhosos.
+					
+					\textbracketred{Assim como}{comparativa} eu adoro o meu cão, \textbracketred{assim também}{consecutiva	} ele retribui com gestos carinhosos.
+			\end{itemize}}};
+		 %\node[circle, fill=blue,text=white, inner sep=1pt, outer sep=0pt] at (a.north) {C};		
+		
+	\end{tikzpicture}
+
+\begin{tikzpicture} 
+	\node[rectangle, thick, dotted, draw=blue] (a) at (0,0) {\parbox{50cm}{
+\begin{itemize}
+		\itemcolor{a.}A Joana não dormiu, pois está sempre a bocejar.
+		
+		A Joana não dormiu, \textbracketred{pois}{Coordenada Explicativa} está sempre a bocejar.
+		
+		\itemcolor{b.}Nas férias, ou vou para a praia ou procuro um lugar calmo no campo.
+		
+		Nas férias, \textbracketred{ou vou para a praia ou procuro um lugar calmo}{Coordenada Disjuntiva} no campo.
+		
+		\itemcolor{c.}O David não só arrumou o quarto como também limpou as janelas.
+		
+		O David não só arrumou o quarto \textbracketred{como também}{Coordenada Copulativa} limpou as janelas.
+		
+		\itemcolor{d.}Tenho poupado algum dinheiro, logo posso comprar mais uns livros.
+		
+		Tenho poupado algum dinheiro, \textbracketred{logo}{Coordenada Conclusiva} posso comprar mais uns livros.
+		
+		\itemcolor{f.}Adoro policiais, mas prefiro romances históricos.
+
+		Adoro policiais, \textbracketred{mas}{Coordenada Adversativa} prefiro romances históricos.
+		
+	\end{itemize}}}; 
+\end{tikzpicture}
+
+\begin{tikzpicture} 
+	\node[rectangle, thick, dotted, draw=blue] (a) at (0,0) {\parbox{50cm}{
+			\begin{itemize}
+				\itemcolor{a.}O Pedro caminhou muito. As pernas doíam-lhe.(\text{\textcolor{blue}{consequência}})
+				
+				\textbracketgreen{O Pedro caminhou muito}{Subordinante}, \textbracketred{de maneira que as pernas lhe doíam}{Oração Subordinada Adverbial Consecutiva}.
+				
+				\itemcolor{b.}O Diogo está ciente da resposta certa. O Diogo não corrigiu o amigo. (\text{\textcolor{blue}{contraste}})
+				
+				\textbracketgreen{O Diogo está ciente da resposta certa}{Subordinante}, \textbracketred{embora não corrigiu o amigo.}{Oração Subordinada Adverbial Concessiva}
+				
+				\itemcolor{c.}Não conto os meus segredos. Não revelo os desabafos dos amigos.(\text{\textcolor{blue}{adição}})
+				
+				\textbracketgreen{Não conto os meus segredos}{Oração Coordenada}, \textbracketred{mas também não revelo os desabafos dos amigos.}{Oração coordenada copulativa}
+				
+				\itemcolor{d.}A Sara estava a estudar. O pai estava a cozinhar.(\text{\textcolor{blue}{tempo}})
+				
+				\textbracketgreen{A Sara estava a estudar}{Subordinate} \textbracketred{enquanto o pai estava a cozinhar.}{Oração Subordinada Adverbial Temporal}
+				
+				\itemcolor{e.}O professor está com calor. O professor abriu a janela.(\text{\textcolor{blue}{explicativa}})
+				
+				\textbracketgreen{O professor está com calor}{Subordinante},\textbracketred{pois abriu a janela.}{Oração Coordenada Explicativa}
+				
+				\itemcolor{f.}O meu cão salta muito alto. Um canguru salta muito alto.(\text{\textcolor{blue}{comparação}})
+				
+				\textbracketgreen{O meu cão salta muito alto}{Subordinante}, \textbracketred{que nem um canguru.}{Oração Subordinativa Adverbial Comparativa}
+				
+				\itemcolor{g.}Adorava ver aquela peça de teatro. O espetáculo foi cancelado.(\text{\textcolor{blue}{oposição}})
+				
+				\textbracketgreen{Adorava ver aquela peça de teatro}{Oração Coordenada},\textbracketred{mas o espetáculo foi cancelado.}{Oração Coordenada Adversativa}
+				
+				\itemcolor{h.}Tenho de treinar mais. Pretendo ganhar a maratona.(\text{\textcolor{blue}{condição}})
+				
+				\textbracketgreen{Tenho de treinar}{Subordinante},\textbracketred{se pretendo ganhar a maratona.}{Oração Subordinada Condicional}
+								
+	\end{itemize}}}; 
+\end{tikzpicture}
+
+\end{document}

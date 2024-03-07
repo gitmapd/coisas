@@ -1,0 +1,363 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{cancel}
+\usepackage[portuguese]{babel}
+\usepackage{fancybox}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.pathreplacing}
+%\tikzset{
+	%	CE/.style={column #1/.style={nodes={text width=24mm}}}
+	%}
+%\tikzset{
+	%	CA/.style={column #1/.style={nodes={text width=35mm}}}
+	%}
+\tikzset{
+	CE/.style={column #1/.style={nodes={text width=25mm}}}
+}
+\tikzset{
+	CA/.style={column #1/.style={nodes={text width=36mm}}}
+}
+\begin{document}
+	\section*{Exercício 1} \textbf{Seja $\left(u_{n}\right)_{n}$ uma sucessão definida por: $u_{n}=\frac{3}{2+5n	}$}
+	\subsection*{a)}
+	\textbf{Estude $\left(u_{n}\right)_{n}$ quanto à monotonia}\\
+	\\
+	\text{$\left(u_{n+1}\right) - \left(u_{n}\right) < 0$ é monótona decrescente}\\
+	\text{$\left(u_{n+1}\right) - \left(u_{n}\right) > 0$ é monótona crescente}
+	\[\left[\frac{2+5n}{2+5n}\right]\left[\frac{3}{5n+7}\right] - \left[\frac{3}{2+5n}\right]\left[\frac{5n+7}{5n+7}\right] \]
+	
+	\[\frac{6+15n-15n-21}{\left(5n+7\right)\left(2+5n\right)}\]
+	
+	\[\frac{-15}{\left(5n+7\right)\left(2+5n\right)}<0, \forall n \in \mathbb{N}\]
+	\text{$u_{n}$ é monótona decrescente}
+	
+	\subsection*{b)}
+	\textbf{$\left(u_{n}\right)_{n}$ é uma sucessão convergente? Justifique.}
+	\[\lim\limits_{n}\frac{3}{2+5n} = \frac{3}{+\infty} = 0\]
+	
+	\text{$\left(u_{n}\right)_{n}$ é convergente pois tende para um número real. Toda a sucessão convergente é limitada.}
+	
+	\begin{tikzpicture}[scale=1.5][master]
+		\begin{axis}[enlargelimits=0.1,]
+			\addplot+ [nodes near coords,only marks,point meta=explicit symbolic]
+			table [meta=label] {
+				x    y   label
+				1   0.428  $u_{1}$
+				2   0.25   $u_{2}$
+				3   0.176  $u_{3}$
+				4   0.136  $u_{4}$
+				5   0.111  $u_{5}$
+				6   0.093  $u_{6}$
+				7   0.081  $u_{7}$
+				8   0.071  $u_{8}$
+				9   0.063  $u_{9}$
+				10  0.052  $u_{10}$
+				};
+		\end{axis}
+	\end{tikzpicture}
+	
+	\section*{Exercício 2}
+
+	\textbf{Considere a uma sucessão $\left(a_{n}\right)_{n}$ de termo geral $a_{n}= \frac{\left(-1\right)^n}{n+4}$. Verifique se $\left(a_{n}\right)_{n}$ é limitada. Justifique a sua resposta.}\\
+
+	\[a_{n}=\begin{cases}
+	\text{Para n par: $\lim\limits_{n}\ \frac{1}{n+4}=\frac{1}{+\infty}=0$}\\
+	\text{Para n ímpar: $\lim\limits_{n}\ \frac{-1}{n+4}=\frac{-1}{+\infty}=0$}
+\end{cases}\]
+	\text{$\left(a_{n}\right)_{n}$ é convergente pois tende para um número real. Toda a sucessão convergente é limitada.}
+	
+	\[-\frac{1}{5}\leq a_{n} \leq \frac{1}{6} \]
+	
+	
+	\begin{tikzpicture}[scale=1.5][master]
+		\begin{axis}[enlargelimits=0.1,]
+			\addplot+ [nodes near coords,only marks,point meta=explicit symbolic]
+			table [meta=label] {
+				x    y   label
+				1 -0.2 $a_{1}$
+		    	2  0.166 $a_{2}$
+		    	3 -0.142 $a_{3}$
+		    	4  0.125 $a_{4}$
+		    	5 -0.111 $a_{5}$
+		    	6  0.1 $a_{6}$
+		    	7 -0.09 $a_{7}$
+		    	8  0.08 $a_{8}$
+		    	9 -0.07 $a_{9}$
+		    	10 0.071 $a_{10}$
+		};
+		\end{axis}
+	\end{tikzpicture}
+	
+	\section*{Exercício 3}
+\textbf{Determine, caso existam, os seguintes limites:}
+
+\subsection*{a)}
+\[\lim\limits_{n}\left(\frac{\sqrt{n^2+1}}{3n-2}\right)\overset{\mathrm{\frac{\infty}{\infty}}}{=}\]
+
+\[\lim\limits_{n}\ \left(\frac{\cancel{n}\sqrt{1+\cancelto{0}{\frac{1}{n^2}}}}{\cancel{n}\left(3-\cancelto{0}{\frac{2}{n}}\right)}\right)\]
+
+\[= \frac{\sqrt{1}}{3}=\frac{1}{3}\]
+	
+	\subsection*{b)}
+	\[\lim\limits_{n}\ \left(2n-\sqrt{2+4n^2}\right)\overset{\mathrm{\infty-\infty}}{=}\]
+	
+	\[\lim\limits_{n}\ \left(\frac{\left(2n-\sqrt{2+4n^2}\right)\left(2n+\sqrt{2+4n^ 2}\right)}{\left(2n+\sqrt{2+4n^2}\right)}\right)\]
+	
+	\[\lim\limits_{n}\ \frac{-2}{2n+\sqrt{2+4n^2}} = \frac{-2}{+\infty}=0\]
+	
+	\subsection*{c)}
+	\[\lim\limits_{n}\ \left(\frac{n+3}{n}\right)^{2n}\overset{\mathrm{1^{\infty}}}{=}\]
+	
+	\[\lim\limits_{n}\ \left[\left(1+\frac{3}{n}\right)^{n}\right]^{2}\]
+	
+	\[=e^{6}\]
+	
+	\section*{Exercício 4}
+
+	\textbf{Determine o domínio da função real de variável real definida por $f(x) = \frac{\sqrt{-x^2+25}}{x-5}$}
+	
+	\text{C.A.}
+	
+	\begin{tikzpicture}[declare function={
+			parabola(\x) = -1*\x^2 + 25;
+		}]
+		
+		\begin{axis}[
+			y axis line style={opacity=0},
+			axis x line=middle,
+			domain=-6:6,
+			scaled ticks=false,
+			ytick={\empty},
+			xtick={\empty}, 
+			xmin = -6,
+			xmax = 6,
+			ymin = -2,
+			ymax = 25,
+			]
+			\addplot[no marks] {parabola(x)};
+		\end{axis}
+		\node at (6.6,0.1){$5$};
+		\node at (0.1,0.1){$-5$};
+		\node at (3.4,6.0){$25$};
+	\end{tikzpicture}
+	\textbf{$-x^2+25\geq 0=\left[-5,5\right]$}
+	\[D_{f}=\{x \in \mathbb{R}:-x^2+25 \geq 0 \land x \neq 5\}=\left[-5,5\right[\]
+	
+\section*{Exercício 5}\textbf{Na figura está representada graficamente a função $\it{g}$ de domínio.}
+
+\textbf{$]-4,\frac{15}{2}]$.}
+	
+		\begin{tikzpicture}[>=latex]
+		\begin{axis}[
+			axis x line=center,
+			axis y line=center,
+			xtick={-5,-4,...,5},
+			ytick={-5,-4,...,5},
+			xlabel={$x$},
+			ylabel={$y$},
+			xlabel style={below right},
+			ylabel style={above left},
+			xmin=-5.5,
+			xmax=8,
+			ymin=-5.5,
+			ymax=5.5]
+			\addplot[domain=-4:-1] {-1*((\x)+2)^2+1};
+			\addplot[domain=-1:2] {(\x)+1};
+			\addplot[domain=2:7.5] {(-1/3)*(\x)+(5/3)};
+			\draw[dashed] (axis cs:-2,0) -- (axis cs:-2,4) -- (axis cs:0,4);
+			\draw[dashed] (axis cs:2,0) -- (axis cs:2,1) -- (axis cs:0,1);
+			\draw[dashed] (axis cs:2,0) -- (axis cs:2,3) -- (axis cs:0,3);
+			\addplot[mark=*] coordinates {(-2,4)};
+			\addplot[mark=*,fill=white] coordinates {(-2,1)};
+			\addplot[mark=*,fill=white] coordinates {(2,1)};
+			\addplot[mark=*] coordinates {(2,3)};
+		\end{axis}
+	\end{tikzpicture}
+
+\textbf{Indique:}
+
+\begin{itemize}
+\item[i)] \textbf{os zeros de $\it{g}$, se existirem;}
+
+	\text{Os zeros são $-3,-1,5$.}
+
+\item[ii)] \textbf{um intervalo em que $\it{g}$ seja simultaneamente negativa e crescente;}
+
+\text{$]-4,-3[$}
+
+\item[iii)] \textbf{um intervalo em que g seja injetiva;}
+
+\text{$]-4,-3[$ e $]-1,2[$}
+
+\item[iv)] \textbf{o valor de $g(-2)$;}
+
+\text{O valor é $4$.}
+
+\item[v)] \textbf{os valores de x para os quais $g(x) > 1$.}
+
+\text{$\{-2\}\cup ]0,2]$}
+
+\end{itemize}
+	\section*{Exercício 6}
+	\textbf{Considere a funcão quadrática $\it{f}$, de domínio $\mathbb{R}$, definida por  $f(x) = -2x^2 + 4x - 4$.}
+	\subsection*{a)}
+	\textbf{Determine as coordenadas do vértice da parábola representativa do gráfico da função $\it{f}$ escreva uma equação do eixo de simetria da parábola.}
+	
+	\text{O vertíce da parábola é $V(1,-2)$ e a sua equação do eixo de simetria é $x=1$}
+	
+	\subsection*{b)}
+	\textbf{Indique, justificando, o contradomínio de $\it{f}$.}
+	\[D'_{f}=\left]-\infty,-2\right]\]
+	\text{Conclui-se esse contradomínio porque é uma parábola com concavidade para baixo e $-2$ é a coordenada do seu vértice.}
+	
+	\section*{Exercício 7}
+		\textbf{Considere a função $\it{h}$ real de domínio $]-3,3]$ definida por:}
+	\[h(x)=\begin{cases}
+		\text{$-3$, se $-3 < x \leq -1$}\\ 
+		\text{$x$, se $-1 < x \leq 3$}
+	\end{cases}\]
+	
+	
+	\textbf{Represente graficamente a função $\it{|h(x)|}$. (Nota: não é necessário apresentar os cálculos.)}
+	
+	\begin{tikzpicture}[>=latex]
+		\begin{axis}[
+			axis x line=center,
+			axis y line=center,
+			xtick={-5,-4,...,5},
+			ytick={-5,-4,...,5},
+			xlabel={$x$},
+			ylabel={$y$},
+			xlabel style={below right},
+			ylabel style={above left},
+			xmin=-5.5,
+			xmax=8,
+			ymin=-5.5,
+			ymax=5.5]
+			\addplot[domain=-3:-1] {3};
+			\addplot[domain=-1:0] {-(\x)};
+			\addplot[domain=0:3] {(\x)};
+			\draw[dashed] (axis cs:3,0) -- (axis cs:3,3) -- (axis cs:0,3);
+			\draw[dashed] (axis cs:-1,0) -- (axis cs:-1,1) -- (axis cs:0,1);
+			\draw[dashed] (axis cs:-1,0) -- (axis cs:-1,3) -- (axis cs:0,3);
+			\draw[dashed] (axis cs:-3,0) -- (axis cs:-3,3) -- (axis cs:0,3);
+			\addplot[mark=*] coordinates {(-1,3)};
+			\addplot[mark=*,fill=white] coordinates {(-3,3)};
+			\addplot[mark=*,fill=white] coordinates {(-1,1)};
+			\addplot[mark=*] coordinates {(3,3)};
+			\addplot[mark=*] coordinates {(0,0)};
+		\end{axis}
+	\end{tikzpicture}
+	\[h_{g}=]-3,3]\]
+	\[h'_{g}=[0,3]\]
+	
+	\section*{Exercício 8}\textbf{Resolva, em $\mathbb{R}$, a seguinte inequação: $x^3 - 6x \leq 0$.}
+\text{C.A.}
+\[x^3-6x=0\]
+\[\Leftrightarrow x\left(x^2-6\right)=0\]
+\[\Leftrightarrow x=0 \lor x=-\sqrt{6}\lor x=\sqrt{6}\]
+
+\text{C.A.}
+
+	\begin{tikzpicture}[declare function={
+			parabola(\x) = \x^2 -6;
+		}]
+		\begin{axis}[
+			y axis line style={opacity=0},
+			axis x line=middle,
+			domain=-7:7,
+			scaled ticks=false,
+			ytick={\empty},
+			xtick={\empty}, 
+			xmin = -7,
+			xmax = 7,
+			ymin = -7,
+			ymax = 7,
+			]
+			\addplot[no marks] {parabola(x)};
+		\end{axis}
+		\node at (5.2,2.5){$\sqrt{6}$};
+		\node at (1.5,2.5){$-\sqrt{6}$};
+		\node at (3.4,0.2){$-6$};
+		
+	\end{tikzpicture}
+
+		\begin{tikzpicture}
+		%\matrix[matrix of math nodes,
+		%nodes in empty cells,
+		%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+		%row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+		\matrix[matrix of math nodes,
+		nodes in empty cells,
+		nodes={text width=1cm,minimum height=8mm,anchor=north east, text centered}, 
+		row 1/.style={nodes={minimum height=5mm}},CE/.list={1}](S)
+		{
+			& & & & & & & & \\
+			& & & & & & & & \\
+			& & & & & & & & \\
+			& & & & & & & & \\
+		};
+		\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-8.north east) |- cycle;
+		\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-4-8.south east);
+		\draw[ultra thick] (S-1-1.south west) -- (S-1-8.south east);
+		\draw (S-2-1.south west) -- (S-2-8.south east);
+		\draw (S-3-1.south west) -- (S-3-8.south east);
+		\foreach \i in{1,...,8}{
+			\draw (S-1-\i.north east) -- (S-4-\i.south east);
+			\node at (S-1-1) {$x$};
+			\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+			\node[anchor=east] at (S-1-8.east) {\(+\infty\)};
+			\node at (S-1-3) {\(-\sqrt{6}\)};
+			\node at (S-1-5) {\(0\)};
+			\node at (S-1-7) {\(\sqrt{6}\)};
+			\node at (S-2-1) {\(x\)};
+			\node at (S-3-1) {\(x^2-6\)};
+			\node at (S-4-1) {\(\left(x\right)\left(x^2-6\right)\)};
+			\node at (S-2-2) {\(-\)};
+			\node at (S-2-3) {\(-\)};
+			\node at (S-2-4) {\(-\)};
+			\node at (S-2-5) {\(0\)};
+			\node at (S-3-4) {\(-\)};
+			\node at (S-2-5) {\(0\)};
+			\node at (S-2-6) {\(+\)};
+			\node at (S-2-7) {\(+\)};
+			\node at (S-2-8) {\(+\)};
+			\node at (S-3-2) {\(+\)};
+			\node at (S-3-3) {\(0\)};
+			\node at (S-3-4) {\(-\)};
+			\node at (S-3-5) {\(-\)};
+			\node at (S-3-6) {\(-\)};
+			\node at (S-3-7) {\(0\)};
+			\node at (S-3-8) {\(+\)};
+			\node at (S-4-2) {\(-\)};
+			\node at (S-4-3) {\(0\)};
+			\node at (S-4-4) {\(+\)};
+			\node at (S-4-5) {\(0\)};
+			\node at (S-4-6) {\(-\)};
+			\node at (S-4-7) {\(0\)};
+			\node at (S-4-8) {\(+\)};
+		}
+		\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-2.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-4-3.south east);
+		\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-5.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-4-7.south east);
+	\end{tikzpicture}
+	\[CS]-\infty,-\sqrt{6}]\cup [0,\sqrt{6}]\]
+	\section*{Exercício 9} \textbf{Considere a função real de variável real definida pela expressão $f(x) = -2x^2 + 4x$. Determine analiticamente para que valores de $k \in \mathbb{R}$ a equação $f(x) = k$ tem duas soluções distintas.}
+	
+	\text{Para ter duas soluções distintas então $\Delta >0$.}
+	\[-2x^2+4x=k\]
+	\[\Leftrightarrow -2x^2+4x-k=0\]
+	\text{C.A.}
+	\[\Delta>0 \Leftrightarrow 16-8k>0\]
+	\[\Leftrightarrow k < 2\Leftrightarrow k \in ]-\infty,2[\]
+	
+
+	
+\end{document}

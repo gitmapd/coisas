@@ -1,0 +1,33 @@
+\documentclass[twocolumn]{article}
+\usepackage{tabularray}
+\usepackage{lipsum}
+\usepackage{stfloats} 
+\usepackage{xcolor}
+\usepackage{soulutf8}
+\usepackage{bbding}
+\newcommand\itemcolor[1]{\item[\textcolor{blue}#1]}
+\setulcolor{green} 
+\begin{document}
+
+\begin{tblr}{|c|c|c|c|c|}
+\hline
+\SetCell[r=2]{c} Orações subordinadas adverbiais
+	& \SetCell[c=4]{c} Classificação
+	  \SetCell[r=4]{c} & \\
+\hline
+	& comparativa & consecutiva & concessiva & causal \\
+\hline
+	 \parbox{10cm}{\textcolor{blue}{a.}Foste de tal forma simpática \ul{que me emprestaste o teu computador para o trabalho.}}& &  \CheckmarkBold & &   \\
+\hline
+	\parbox{10cm}{\textcolor{blue}{b.}\ul{Como te dedicaste,} foste capaz de uma grande prestação.}& \CheckmarkBold & &  \\
+\hline
+	\parbox{10cm}{\textcolor{blue}{c.}\ul{Apesar de ser ainda madrugada,} vou correr.}& & & \CheckmarkBold \\
+\hline
+	\parbox{10cm}{\textcolor{blue}{d.}A Mariana estuda com tanto empenho \ul{como nada com dedicação.}} & \CheckmarkBold & &  \\
+\hline
+	\parbox{10cm}{\textcolor{blue}{e.}Os citrinos são importantes para a saúde, \ul{visto que contêm vitamina C.}} & & & & \CheckmarkBold \\
+\hline
+	\parbox{10cm}{\textcolor{blue}{f.}Acompanho-te à consulta, \ul{embora esteja um pouco atrasado}.} & & &  \CheckmarkBold\\
+\hline
+\end{tblr}
+\end{document}

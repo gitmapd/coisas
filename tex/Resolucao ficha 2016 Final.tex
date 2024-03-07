@@ -1,0 +1,429 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{cancel}
+\usepackage[portuguese]{babel}
+\usepackage{fancybox}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.pathreplacing}
+%\tikzset{
+	%	CE/.style={column #1/.style={nodes={text width=24mm}}}
+	%}
+%\tikzset{
+	%	CA/.style={column #1/.style={nodes={text width=35mm}}}
+	%}
+\tikzset{
+	CE/.style={column #1/.style={nodes={text width=25mm}}}
+}
+\tikzset{
+	CA/.style={column #1/.style={nodes={text width=36mm}}}
+}
+\begin{document}
+	\section*{Exercício 1} \textbf{Seja $\left(u_{n}\right)_{n}$ uma sucessão definida por: $u_{n}=\frac{1-3n}{n+1}$}
+	\subsection*{a)}
+	\textbf{Verifique se $-\frac{14}{5}$ é um dos termos de $\left(u_{n}\right)_{n}$}
+	\[\frac{1-3n}{n+1}=-\frac{14}{5}\]
+	\[n=19\]
+	\[u_{19}=-\frac{14}{5}\]
+	\subsection*{b)}
+	\textbf{Estude $\left(u_{n}\right)_{n}$ quanto à monotonia}\\
+	\\
+	\text{$\left(u_{n+1}\right) - \left(u_{n}\right) < 0$ é monótona decrescente}\\
+	\text{$\left(u_{n+1}\right) - \left(u_{n}\right) > 0$ é monótona crescente}
+	\[\left[\frac{n+1}{n+1}\right]\left[\frac{-3n-2}{n+2}\right] - \left[\frac{1-3n}{n+1}\right]\left[\frac{n+2}{n+2}\right] \]
+	
+	\[\frac{-3n^2-3n-2n-2}{\left(n+1\right)\left(n+2\right)} - \frac{n+2-3n^2-6n}{\left(n+1\right)\left(n+2\right)}\]
+	
+	\[\frac{-3n^2-3n-2n-2-n-2+3n^2+6n}{\left(n+1\right)\left(n+2\right)}\]
+	
+	\[\frac{-4}{\left(n+1\right)\left(n+2\right)}<0, \forall n \in \mathbb{N}\]
+	\text{$u_{n}$ é monótona decrescente}
+	
+	\subsection*{c)}
+	\textbf{$\left(u_{n}\right)_{n}$ é uma sucessão convergente? E limitada? Justifique.}
+	\[\lim\limits_{n}\frac{1-3n}{n+1} =
+	\lim\limits_{n} \frac{\cancel{n}\left(\frac{1}{n}-3\right)}{\cancel{n}\left(1+ \frac{1}{n}\right)} = \frac{\cancelto{0}{\frac{1}{n}}-3}{1+ \cancelto{0}{\frac{1}{n}}} = -3\]
+	
+	\text{$\left(u_{n}\right)_{n}$ é convergente pois tende para um número real. Toda a sucessão convergente é limitada.}
+	
+	\text{Como $\left(u_{n}\right)_{n}$ é decrescente sabemos que:}
+	\[\frac{1-3n}{n+1} = -3 + \frac{4}{n+1}\]
+	\[\frac{4}{n+1} > 0, \text{então qualquer termo será sempre superior a $-3$} \]
+	\[-3 < u_{n} < -1, \forall n \in \mathbb{N} \]
+\\
+\\
+
+\begin{tikzpicture}[scale=1.5][master]
+		\begin{axis}[enlargelimits=0.1,]
+			\addplot+ [nodes near coords,only marks,point meta=explicit symbolic]
+			table [meta=label] {
+				x    y   label
+				1   -1  $u_{1}$
+				2   -1.666 $u_{2}$
+				3   -2 $u_{3}$
+				4   -2.2 $u_{4}$
+				5   -2.333 $u_{5}$
+				8   -2.555 $u_{8}$
+				10  -2.6363 $u_{10}$
+				15  -2.75 $u_{15}$
+				19  -2.8 $u_{19}$
+			};
+		\end{axis}
+	\end{tikzpicture}
+
+\section*{Exercício 2}
+
+\textbf{Dê um exemplo concreto de uma sucessão $\left(a_{n}\right)_{n}$ , que verifique em simultâneo as
+seguintes afirmações:}\\
+\begin{itemize}
+	\item \text{$\left(a_{n}\right)_{n}$ é uma sucessão limitada e não monótona}
+	\item \text{$\lim\limits_{n} (3a_{n} ) = 0$}\\
+	\text{Justifique a sua resposta.}
+\end{itemize}
+\[a_{n} = \frac{3\left(-1\right)^n}{n}\]
+
+
+
+
+\begin{tikzpicture}[scale=1.5][master]
+	\begin{axis}[enlargelimits=0.1,]
+		\addplot+ [nodes near coords,only marks,point meta=explicit symbolic]
+		table [meta=label] {
+			x    y   label
+			1   -3  $u_{1}$
+			2    1.5 $u_{2}$
+			3   -1 $u_{3}$
+			4    0.75 $u_{4}$
+			5   -0.6 $u_{5}$
+			6    0.5 $u_{8}$
+			7   -0.428 $u_{10}$
+			8    0.375 $u_{15}$
+			9   -0.333 $u_{19}$
+		};
+	\end{axis}
+\end{tikzpicture}
+
+\section*{Exercício 3}
+\subsection*{a)}
+\[\lim\limits_{n}\left(\frac{-7n^3-5n^2+n}{3\sqrt{n^2+1}}\right)\overset{\mathrm{\frac{\infty}{\infty}}}{=}\]
+
+\[\lim\limits_{n}\ \left(\frac{n^{\cancel{3}\left(-7-\cancelto{0}{\frac{5}{n}}+\cancelto{0}{\frac{1}{n^2}}\right)}}{3\cancel{n}\sqrt{1+\cancelto{0}{\frac{1}{n^2}}}}\right)\]
+
+\[= \frac{+\infty\left(-7\right)}{3}=-\infty\]
+
+\subsection*{b)}
+\[\lim\limits_{n}\ \left(\sqrt{2n-3}-\sqrt{2n+5}\right)\overset{\mathrm{\infty-\infty}}{=}\]
+
+\[\lim\limits_{n}\ \left(\frac{\left(\sqrt{2n-3}-\sqrt{2n+5}\right)\left(\sqrt{2n-3}+\sqrt{2n+5}\right)}{\left(\sqrt{2n-3}+\sqrt{2n+5}\right)}\right)\]
+
+\[\lim\limits_{n}\ \frac{-8}{\sqrt{2n-3}+\sqrt{2n+5}} = \frac{-8}{+\infty}=0\]
+
+\subsection*{c)}
+\[\lim\limits_{n}\ \left(\frac{n-2}{n+1}\right)^{n+3}\overset{\mathrm{1^{\infty}}}{=}\]
+
+\[\lim\limits_{n}\ \left(\frac{\cancel{n}\left(1-\frac{2}{n}\right)}{\cancel{n}\left(1+\frac{1}{n}\right)}\right)^{n} \cdot \lim\limits_{n}\left(\frac{\cancel{n}\left(1-\frac{2}{n}\right)}{\cancel{n}\left(1+\frac{1}{n}\right)}\right)^{3}\]
+
+\[\frac{\lim\limits_{n}\left(1-\cancelto{0}{\frac{2}{n}}\right)^n}{\lim\limits_{n}\left(1+\cancelto{0}{\frac{1}{n}}\right)^n}\cdot \lim\limits_{n}\left(\frac{1-\cancelto{0}{\frac{2}{n}}}{1+\cancelto{0}{\frac{1}{n}}}\right)^{3}=\frac{e^-2}{e}\cdot 1^3=e^{-3}\]
+
+\subsection*{d)}
+\[\lim\limits_{n}\left(n^2-\left(-2\right)^nn\right)=+\infty\]
+
+\[\begin{cases}
+	\text{Para n par: $\lim\limits_{n}\ \left(n^2-n\right)\overset{\mathrm{\infty-\infty}}{=} \lim\limits_{n}\ \left(n^2\left(1-\cancelto{0}{\frac{1}{n}}\right)\right)=+\infty$}\\ 
+	\text{Para n ímpar: $\lim\limits_{n}\ \left(n^2+n\right) = +\infty$}
+\end{cases}\]
+
+\section*{Exercício 4}
+\subsection*{a)}
+\textbf{Considere a função real de variável real definida por $f(x) = \frac{1}{\sqrt{2x+4}}$}
+\[D_{f}=\{x \in \mathbb{R}:2x+4 > 0\}=]-2,+\infty[\]
+\subsection*{b)}
+\textbf{Averigue se o ponto de coordenadas $\left(16,\frac{1}{6}\right)$ pertence ao gráfico de $\it{f}$} .
+\[f\left(16\right)=\frac{1}{\sqrt{2\left(16\right)+4}}=\frac{1}{6}=\frac{1}{6}\]
+\text{Logo $\left(16,\frac{1}{6}\right)$ pertence a $\it{f}$}
+
+\section*{Exercício 5}
+\textbf{Na figura está representada graficamente a função $\it{g}$.}
+	
+	\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-5,-4,...,5},
+		ytick={-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below right},
+		ylabel style={above left},
+		xmin=-5.5,
+		xmax=5.5,
+		ymin=-5.5,
+		ymax=5.5]
+		\addplot[domain=-2:0] {-1/2*(\x)};
+		\addplot[domain=0:1] {-(\x)};
+		\addplot[domain=1:2] {-2*(\x)+4};
+		\addplot[domain=2:3] {(\x)-2};
+		\addplot[mark=*,fill=white] coordinates {(1,2)};
+		\addplot[mark=*,fill=white] coordinates {(2,0)};
+		\addplot[mark=*] coordinates {(2,2)};
+		\addplot[mark=*] coordinates {(-2,1)};
+		\addplot[mark=*] coordinates {(1,-1)};
+		\addplot[mark=*] coordinates {(3,1)};
+	\end{axis}
+\end{tikzpicture}
+\subsection*{a)}\textbf{Indique:}
+\begin{itemize}
+	\item[i)]\textbf{o domínio e o contradomínio de g;}
+	\[D_{g}=[-2,3]\]
+	\[D'_{g}=[-1,2]\]
+	\item[ii)]\textbf{os zeros de g, se existirem;}
+	
+	\text{$\it{g}$ só tem um zero que é $x=0$}
+	
+	\item[iii)]\textbf{um intervalo em que g seja simultaneamente positiva e decrescente;}
+	
+	\text{$\left[-2,0\right[$ e $\left]1,2\right[$.}
+	
+	\item[iv)]\textbf{os extremos (máximo e mínimo) absolutos de g, se existirem.}
+	\text{Máximo absoluto $2$ e mínimo absoluto $-1$.}
+\end{itemize}
+
+\subsection*{b)}\textbf{Indique o número de soluções da condição $\lvert g(x)\rvert=1$.}
+
+\text{Existem 4 soluções: $-2,3,1$ e entre $1$ e $2$.}
+\section*{Exercício 6}
+\textbf{Considere a funcão quadrática $\it{f}$, de domínio $\mathbb{R}$, definida por  $f(x) = -x^2 + 4x + 5$.}
+\subsection*{a)}
+\textbf{Escreva a expressão $-x^2 + 4x + 5$ na forma $a\left(x-h\right)^2 + k$ .}
+\[f(x)=-\left(x-2\right)^2+9\]
+\subsection*{b)}
+\textbf{Escreva uma equação do eixo de simetria da parábola representativa do gráfico da função.}
+\[x=2\]
+\subsection*{c)}
+\textbf{Indique dois objetos diferentes que tenham a mesma imagem por $\it{f}$.}
+\[x=-1\]
+\[x=5\]
+\subsection*{d)}
+\textbf{Indique, justificando, o contradomínio de $\it{f}$.}
+	
+	\begin{tikzpicture}[declare function={
+		parabola(\x) = -1*\x^2+ 4*\x + 5;
+	}]
+	\textbf{$D'_{f}=]-\infty,9]$}
+	\begin{axis}[
+		y axis line style={opacity=0},
+		axis x line=middle,
+		domain=-2:6,
+		scaled ticks=false,
+		ytick={\empty},
+		xtick={\empty}, 
+		xmin = -2,
+		xmax = 6,
+		ymin = -2,
+		ymax = 10,
+		]
+		\addplot[no marks] {parabola(x)};
+	\end{axis}
+	\node at (6.3,0.5){$5$};
+	\node at (0.5,0.5){$-1$};
+	\node at (3.4,5.5){$9$};
+	
+\end{tikzpicture}
+
+\section*{Exercício 7}
+\textbf{Considere a função $\it{h}$ real de domínio $]-1,3]$ definida por:}
+\[h(x)=\begin{cases}
+	\text{$-2x^2+2$, se $-1 < x \leq 1$}\\ 
+	\text{$2x-3$, se $1 < x \leq 3$}
+\end{cases}\]
+
+
+\textbf{Represente graficamente a função $\it{h}$. (Nota: apresente todos os cálculos que efetuar.)}
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-5,-4,...,5},
+		ytick={-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below right},
+		ylabel style={above left},
+		xmin=-5.5,
+		xmax=5.5,
+		ymin=-5.5,
+		ymax=5.5]
+		\addplot[domain=-1:1] {-2*(\x)^2+2};
+		\addplot[domain=1:3] {2*(\x)-3};
+		\addplot[mark=*,fill=white] coordinates {(-1,0)};
+		\addplot[mark=*] coordinates {(1,0)};;
+		\addplot[mark=*,fill=white] coordinates {(1,-1)};
+		\addplot[mark=*] coordinates {(3,3)};
+	\end{axis}
+\end{tikzpicture}
+\[D_{f}=]-1,3]\]
+\[D'_{f}=]-1,3]\]
+
+
+
+\section*{Exercício 8}
+
+\subsection*{a)}
+\[\textbf{$2x-x^2 \geq 0$}\]
+
+	\begin{tikzpicture}[declare function={
+		parabola(\x) = 2*\x - \x^2;
+	}]
+	\begin{axis}[
+		y axis line style={opacity=0},
+		axis x line=middle,
+		domain=-2:4,
+		scaled ticks=false,
+		ytick={\empty},
+		xtick={\empty}, 
+		xmin = -2,
+		xmax = 4,
+		ymin = -1,
+		ymax = 3,
+		]
+		\addplot[no marks] {parabola(x)};
+	\end{axis}
+	\node at (5.2,1.1){$2$};
+	\node at (1.7,1.1){$0$};
+	\node at (3.4,2.2){$+$};
+	\node at (0.5,0.5){$-$};
+	\node at (6.3,0.5){$-$};
+\end{tikzpicture}
+\[\text{C.S.=[0,2]}\]
+
+\subsection*{b)}
+\[\textbf{$2x^3+3x^2 \leq 2x$}\]
+\[\textbf{$\left(x\right)\left(2x^2+3x-2\right)\leq 0$}\]
+\begin{tikzpicture}
+	%\matrix[matrix of math nodes,
+	%nodes in empty cells,
+	%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+	%row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	\matrix[matrix of math nodes,
+	nodes in empty cells,
+	nodes={text width=1cm,minimum height=8mm,anchor=north east, text centered}, 
+	row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	{
+		& & & & & & & & \\
+		& & & & & & & & \\
+		& & & & & & & & \\
+		& & & & & & & & \\
+	};
+	\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-8.north east) |- cycle;
+	\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-4-8.south east);
+	\draw[ultra thick] (S-1-1.south west) -- (S-1-8.south east);
+	\draw (S-2-1.south west) -- (S-2-8.south east);
+	\draw (S-3-1.south west) -- (S-3-8.south east);
+	\foreach \i in{1,...,8}{
+		\draw (S-1-\i.north east) -- (S-4-\i.south east);
+		\node at (S-1-1) {$x$};
+		\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+		\node[anchor=east] at (S-1-8.east) {\(+\infty\)};
+		\node at (S-1-3) {\(-2\)};
+		\node at (S-1-5) {\(0\)};
+		\node at (S-1-7) {\(\frac{1}{2}\)};
+		\node at (S-2-1) {\(x\)};
+		\node at (S-3-1) {\(2x^2+3x-2\)};
+		\node at (S-2-2) {\(-\)};
+		\node at (S-3-2) {\(+\)};
+		\node at (S-2-3) {\(-\)};
+		\node at (S-3-3) {\(0\)};
+		\node at (S-2-4) {\(-\)};
+		\node at (S-3-4) {\(-\)};
+		\node at (S-2-5) {\(0\)};
+		\node at (S-3-5) {\(-\)};
+		\node at (S-2-6) {\(+\)};
+		\node at (S-2-7) {\(+\)};
+		\node at (S-2-8) {\(+\)};
+		\node at (S-3-6) {\(-\)};
+		\node at (S-3-7) {\(0\)};
+		\node at (S-3-8) {\(+\)};
+		\node at (S-4-1) {\(x\left(2x^2+3x-2\right)\)};
+		\node at (S-4-2) {\(-\)};
+		\node at (S-4-3) {\(0\)};
+		\node at (S-4-4) {\(+\)};
+		\node at (S-4-5) {\(0\)};
+		\node at (S-4-6) {\(-\)};
+		\node at (S-4-7) {\(0\)};
+		\node at (S-4-8) {\(+\)};
+	}
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-2.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-4-3.south east);
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-5.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-4-7.south east);
+\end{tikzpicture}
+	\[CS]-\infty,-2]\cup [0,\frac{1}{2}]\]
+
+\subsection*{c)}
+\[\textbf{$\left(x-2\right)\left(x^2+3\right)\left(4-x\right)>0$}\]
+
+
+\begin{tikzpicture}
+	%\matrix[matrix of math nodes,
+	%nodes in empty cells,
+	%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+	%row 1/.style={nodes={minimum height=5mm}},CE/.list={3,5},CA/.list={1}](S)
+	\matrix[matrix of math nodes,
+	nodes in empty cells,
+	nodes={text width=1cm,minimum height=8mm,anchor=north east, text centered}, 
+	row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5},CA/.list={1}](S)
+	{
+		& & & & & & \\
+		& & & & & & \\
+		& & & & & & \\
+		& & & & & & \\
+		& & & & & & \\
+	};
+	\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-6.north east) |- cycle;
+	\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-5-6.south east);
+	\draw[ultra thick] (S-1-1.south west) -- (S-1-6.south east);
+	\draw (S-2-1.south west) -- (S-2-6.south east);
+	\draw (S-3-1.south west) -- (S-3-6.south east);
+	\draw (S-4-1.south west) -- (S-4-6.south east);
+	\foreach \i in{1,...,6}{
+		\draw (S-1-\i.north east) -- (S-5-\i.south east);
+		\node at (S-1-1) {\(x\)};
+		\node at (S-2-1) {\(x-2\)};
+		\node at (S-3-1) {\(x^2+3\)};
+		\node at (S-4-1) {\(4-x\)};
+		\node at (S-5-1) {\(\left(x-2\right)\left(x^2+3\right)\left(4-x\right)\)};
+		\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+		\node[anchor=east] at (S-1-6.east) {\(+\infty\)};
+		\node at (S-1-3) {\(2\)};
+		\node at (S-1-5) {\(4\)};
+		\node at (S-2-2) {\(-\)};
+		\node at (S-2-3) {\(0\)};
+		\node at (S-2-4) {\(+\)};
+		\node at (S-2-5) {\(+\)};
+		\node at (S-2-6) {\(+\)};
+		\node at (S-3-2) {\(+\)};
+		\node at (S-3-3) {\(+\)};
+		\node at (S-3-4) {\(+\)};
+		\node at (S-3-5) {\(+\)};
+		\node at (S-3-6) {\(+\)};
+		\node at (S-4-2) {\(+\)};
+		\node at (S-4-3) {\(+\)};
+		\node at (S-4-4) {\(+\)};
+		\node at (S-4-5) {\(0\)};
+		\node at (S-4-6) {\(-\)};
+		\node at (S-5-2) {\(-\)};
+		\node at (S-5-3) {\(0\)};
+		\node at (S-5-4) {\(+\)};
+		\node at (S-5-5) {\(0\)};
+		\node at (S-5-6) {\(-\)};
+	}
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-5-3.south west) to node[midway,fill opacity=1,below]{Crescente} (S-5-5.south east);
+\end{tikzpicture}
+\[\text{C.S = $]2,4[$}\]
+\end{document}

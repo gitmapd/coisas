@@ -1,0 +1,312 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{cancel}
+\usepackage[portuguese]{babel}
+\usepackage{fancybox}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{polynom}
+\usetikzlibrary{matrix}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.pathreplacing}
+%\tikzset{
+	%	CE/.style={column #1/.style={nodes={text width=24mm}}}
+	%}
+%\tikzset{
+	%	CA/.style={column #1/.style={nodes={text width=35mm}}}
+	%}
+\tikzset{
+	CE/.style={column #1/.style={nodes={text width=29mm}}}
+}
+\tikzset{
+	CA/.style={column #1/.style={nodes={text width=35mm}}}
+}
+\begin{document}
+	\section*{Exercício 1} \textbf{Seja $\left(u_{n}\right)_{n}$ uma sucessão definida por: $u_{n}=\frac{2n-3}{3n}$}
+	
+	\subsection*{a)}
+	\textbf{Estude $\left(u_{n}\right)_{n}$ quanto à monotonia}\\
+	\\
+	\text{$\left(u_{n+1}\right) - \left(u_{n}\right) < 0$ é monótona decrescente}\\
+	\text{$\left(u_{n+1}\right) - \left(u_{n}\right) > 0$ é monótona crescente}
+	
+	\[\left[\frac{3n}{3n}\right]\left[\frac{2n-1}{3n+3}\right] - \left[\frac{2n-3}{3n}\right]\left[\frac{3n+3}{3n+3}\right] \]
+	
+	\[\frac{6n^2-3n}{\left(3n\right)\left(3n+3\right)} - \frac{6n^2-9n+6n-9}{\left(3n\right)\left(3n+3\right)}\]
+	
+	\[\frac{6n^2-3n-6n^2+9n-6n+9}{\left(3n\right)\left(3n+3\right)}\]
+	
+	\[\frac{9}{\left(3n\right)\left(3n+3\right)}>0, \forall n \in \mathbb{N}\]
+	\text{$u_{n}$ é monótona crescente}
+	
+	\subsection*{b)}
+	\textbf{$\left(u_{n}\right)_{n}$ é uma sucessão limitada? Justifique.}
+	\[\lim\limits_{n}\frac{2n-3}{3n} =
+	\lim\limits_{n} \frac{\cancel{n}\left(2-\frac{3}{n}\right)}{\cancel{n}\left(3\right)} = \frac{2-\cancelto{0}{\frac{3}{n}}}{3} = \frac{2}{3}\]
+	
+	\text{$\left(u_{n}\right)_{n}$ é convergente pois tende para um número real. Toda a sucessão convergente é limitada.}
+	
+	\text{Como $\left(u_{n}\right)_{n}$ é crescente sabemos que:}
+	\[\frac{2n-3}{3n}=\frac{2}{3}-\frac{1}{n}\]
+	\[-\frac{1}{n} < 0, \text{então qualquer termo será sempre inferior a $\frac{2}{3}$} \]
+	\[-\frac{1}{3} < u_{n} < \frac{2}{3}, \forall n \in \mathbb{N} \]
+	
+	
+	\begin{tikzpicture}[scale=1.5][master]
+		\begin{axis}[enlargelimits=0.1,]
+			\addplot+ [nodes near coords,only marks,point meta=explicit symbolic]
+			table [meta=label] {
+				x    y   label
+				1 -0.33333333333333337 $u_{1}$
+				2 0.16666666666666663 $u_{2}$
+				3 0.3333333333333333 $u_{3}$
+				4 0.41666666666666663 $u_{4}$
+				5 0.4666666666666666 $u_{5}$
+				6 0.5 $u_{6	}$
+				7 0.5238095238095237 $u_{7}$
+				8 0.5416666666666666 $u_{8}$
+				9 0.5555555555555556 $u_{9}$
+			};
+		\end{axis}
+	\end{tikzpicture}
+	
+	\section*{Exercício 2}
+	
+	\textbf{Considere a sucessão $\left(a_{n}\right)_{n}$ de termo geral $a_{n}=\frac{\left(-1\right)^n}{n}$.}
+	\subsection*{a)}
+	\textbf{Determine os três primeiros termos da sucessão $\left(a_{n}\right)_{n}$.}
+	\subsection*{b)}
+	\textbf{Verifique se $\left(a_{n}\right)_{n}$ é uma sucessão convergente.}
+	\[\begin{cases}
+		\text{Para n par: $\lim\limits_{n}\ \frac{1}{n}=\frac{1}{+\infty}=0$}\\ 
+		\text{Para n ímpar: $\lim\limits_{n}\ -\frac{1}{n}=\frac{-1}{+\infty}=0$}
+	\end{cases}\]
+	\text{$\left(a_{n}\right)_{n}$ é convergente para zero.}
+	
+	\begin{tikzpicture}[scale=1.5][master]
+		\begin{axis}[enlargelimits=0.1,]
+			\addplot+ [nodes near coords,only marks,point meta=explicit symbolic]
+			table [meta=label] {
+				x    y   label
+				1   -1  $a_{1}$
+				2    0.5 $a_{2}$
+				3   -0.333 $a_{3}$
+				4    0.25 $a_{4}$
+				5   -0.2 $a_{5}$
+				6    0.166 $a_{6}$
+				7   -0.142 $a_{7}$
+				8    0.125 $a_{8}$
+				9   -0.111 $a_{9}$
+			};
+		\end{axis}
+	\end{tikzpicture}
+	
+	\section*{Exercício 3}
+	\textbf{Determine, caso existam, os seguintes limites:}
+	
+	\subsection*{a)}
+	\[\lim\limits_{n}\left(\frac{2n}{\sqrt{n^2+1}}\right)\overset{\mathrm{\frac{\infty}{\infty}}}{=}\]
+	
+	\[\lim\limits_{n}\ \left(\frac{\cancel{n}\left(2\right)}{\cancel{n}\sqrt{1+\cancelto{0}{\frac{1}{n^2}}}}\right)\]
+	
+	\[= \frac{2}{\sqrt{1}}=2\]
+	
+	\subsection*{b)}
+	\[\lim\limits_{n}\ \left(\sqrt{n+10}-\sqrt{n}\right)\overset{\mathrm{\infty-\infty}}{=}\]
+	
+	\[\lim\limits_{n}\ \left(\frac{\left(\sqrt{n+10}-\sqrt{n}\right)\left(\sqrt{n+10}+\sqrt{n}\right)}{\left(\sqrt{n+10}+\sqrt{n}\right)}\right)\]
+	
+	\[\lim\limits_{n}\ \frac{10}{\sqrt{n+10}+\sqrt{n}} = \frac{10}{+\infty}=0\]
+	
+	\subsection*{c)}
+	\[\lim\limits_{n}\ \left(1+\frac{10}{n}\right)^{\frac{n}{2}}\overset{\mathrm{1^{\infty}}}{=}\]
+	\[\left[\lim\limits_{n}\ \left(1+\frac{10}{n}\right)^{n}\right]^{\frac{1}{2}}\]
+	\[= \left[e^{10}\right]^{\frac{1}{2}}= e^{5}\]
+	
+	\section*{Exercício 4}
+	\textbf{Considere a função real de variável real definida por $f(x) = \frac{\sqrt{x+5}}{x}$}
+	
+	\[D_{f}=\{x \in \mathbb{R}:x + 5\geq 0 \land x \neq 0 \}=[-5,+\infty[\setminus\{0\}\]
+	\section*{Exercício 5}
+	\textbf{Considere a função quadrática $\it{f}$, $f(x) = \frac{\sqrt{x+5}}{x}$}
+		\subsection*{a)}
+	\subsection*{b)}
+	\textbf{Averigue se o ponto de coordenadas $\left(8,\sqrt{2}\right)$ pertence ao gráfico de $\it{f}$.}
+	\[f\left(8\right)=\frac{\sqrt{8}}{8-6}=\frac{\cancel{2}\sqrt{2}}{\cancel{2}}=\sqrt{2}\]
+	\text{Logo $\left(8,\sqrt{2}\right)$ pertence a $\it{f}$}
+	
+	\textbf{Considere a função real de variável real definida pela expressão
+		$f(x) = (m-3)x^2 - 2x + 1, m \in \mathbb{R} \setminus {3}$. Determine o valor de m de modo que o ponto de coordenadas (-1, 2) pertença ao gráfico de $\it{f}$.}
+	\[f(-1)=2 \Leftrightarrow m=2\]
+	
+	
+\section*{Exercício 6}
+
+\textbf{Considere a função polinomial definida em $\mathbb{R}$ por $p(x) = x^3 - 7x - 6$.}
+
+\subsection*{a)}
+
+\textbf{Mostre, usando a regra de Ruffini, que $p(x) = (x + 1)(x^2 - x - 6)$, para qualquer $x \in \mathbb{R}$.}\\
+
+
+\polyhornerscheme[x=-1]{x^3 - 7x - 6}
+
+\text{Logo,  $(x + 1)(x^2 - x - 6)$}
+
+\subsection*{b)}
+\textbf{Determine, sob a forma de intervalo ou união de intervalos, o conjunto de números reais que verificam a condição $p(x) \leq 0$.}
+
+\[\textbf{$(x + 1)(x^2 - x - 6) \leq 0$}\]
+
+\begin{tikzpicture}
+	%\matrix[matrix of math nodes,
+	%nodes in empty cells,
+	%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+	%row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	\matrix[matrix of math nodes,
+	nodes in empty cells,
+	nodes={text width=1cm,minimum height=8mm,anchor=north east, text centered}, 
+	row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	{
+		& & & & & & & & \\
+		& & & & & & & & \\
+		& & & & & & & & \\
+		& & & & & & & & \\
+	};
+	\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-8.north east) |- cycle;
+	\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-4-8.south east);
+	\draw[ultra thick] (S-1-1.south west) -- (S-1-8.south east);
+	\draw (S-2-1.south west) -- (S-2-8.south east);
+	\draw (S-3-1.south west) -- (S-3-8.south east);
+	\foreach \i in{1,...,8}{
+		\draw (S-1-\i.north east) -- (S-4-\i.south east);
+		\node at (S-1-1) {$x$};
+		\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+		\node[anchor=east] at (S-1-8.east) {\(+\infty\)};
+		\node at (S-1-3) {\(-2\)};
+		\node at (S-1-5) {\(-1\)};
+		\node at (S-1-7) {\(3\)};
+		\node at (S-2-1) {\(x+1\)};
+		\node at (S-3-1) {\(x^2-x-6\)};
+		\node at (S-2-2) {\(-\)};
+		\node at (S-3-2) {\(+\)};
+		\node at (S-2-3) {\(-\)};
+		\node at (S-3-3) {\(0\)};
+		\node at (S-2-4) {\(-\)};
+		\node at (S-3-4) {\(-\)};
+		\node at (S-2-5) {\(0\)};
+		\node at (S-3-5) {\(-\)};
+		\node at (S-2-6) {\(+\)};
+		\node at (S-2-7) {\(+\)};
+		\node at (S-2-8) {\(+\)};
+		\node at (S-3-6) {\(-\)};
+		\node at (S-3-7) {\(0\)};
+		\node at (S-3-8) {\(+\)};
+		\node at (S-4-1) {\(\left(x+1\right)\left(x^2-x-6\right)\)};
+		\node at (S-4-2) {\(-\)};
+		\node at (S-4-3) {\(0\)};
+		\node at (S-4-4) {\(+\)};
+		\node at (S-4-5) {\(0\)};
+		\node at (S-4-6) {\(-\)};
+		\node at (S-4-7) {\(0\)};
+		\node at (S-4-8) {\(+\)};
+	}
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-2.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-4-3.south east);
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-5.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-4-7.south east);
+\end{tikzpicture}
+\[C.S.=]-\infty,-2]\cup [-1,3]\]
+
+	\section*{Exercício 7}
+	\textbf{Considere a função real de domínio $\mathbb{R} \setminus {1}$ definida por:}
+	
+	\[g(x)=\begin{cases}
+		\text{$x^2-4$, se $-2 < x < 2$,}\\ 
+		\text{2,  se $x \geq 2$.}
+	\end{cases}\]
+	\subsection*{a)}
+	
+	\textbf{Represente graficamente a função g. (Nota: não é necessário apresentar cálculos.)}
+	
+	\begin{tikzpicture}[>=latex]
+		\begin{axis}[
+			axis x line=center,
+			axis y line=center,
+			xtick={-5,-4,...,5},
+			ytick={-5,-4,...,5},
+			xlabel={$x$},
+			ylabel={$y$},
+			xlabel style={below right},
+			ylabel style={above left},
+			xmin=-5.5,
+			xmax=8,
+			ymin=-5.5,
+			ymax=5.5]
+			\addplot[domain=-2:2] {(\x)^2-4};
+			\addplot[domain=2:5] {2};
+			\draw[dashed] (axis cs:2,0) -- (axis cs:2,2) -- (axis cs:0,2);
+			\addplot[mark=*,fill=white] coordinates {(2,0)};
+			\addplot[mark=*,fill=white] coordinates {(-2,0)};
+			\addplot[mark=*] coordinates {(2,2)};
+		\end{axis}
+	\end{tikzpicture}
+	\[D_{g}=]-2,+\infty[\]
+	\[D'_{g}=[-4,0[\cup \{2\}\]
+
+	\subsection*{b)}
+	\textbf{Verifique se a função $\it{g}$ é injetiva. Justifique.}\\
+	
+	
+	
+	\text{A funcão não é injetiva pois há objetos diferentes com imagem igual, por exemplo:}
+	\[-2 \neq -3 \land f(-2)=f(-3)=-3\]
+	\subsection*{c)}
+	\textbf{Justifique se é verdadeira a seguinte afirmação: "A função $\it{g}$ é uma função ímpar."}
+	
+	\section*{Exercício 7}
+	
+	\textbf{Considere a funcão quadrática $it{f}$, de domínio $\mathbb{R}$, definida por  $f(x) = -2x^2 - 4x + 1$.}
+	\subsection*{a)}
+	\textbf{Mostre que o vértice da parábola definida pelo gráfico de $\it{f}$ é V(-1, 3).}
+	\[f(x)=-2\left(x+1\right)^2+3\]
+	\text{Logo, o vértice da parábola á V(-1,3)}
+	
+	\subsection*{b)}
+	\textbf{Indique o contradomínio de $\it{f}$.}
+	\[D'_{f}=]-\infty,3]\]
+	
+	\subsection*{c)}
+	\textbf{Indique, caso existam, o máximo e o mínimo absoluto de $\it{f}$.}\\
+	
+	
+	\text{A funcão tem como máximo absoluto 3 mas não tem mínimo absoluto}\\
+	
+	
+	
+	\begin{tikzpicture}[declare function={
+			parabola(\x) = -2*\x^2 - 4*\x + 1;
+		}]
+		\begin{axis}[
+			y axis line style={opacity=0},
+			axis x line=middle,
+			domain=-3:1,
+			scaled ticks=false,
+			ytick={\empty},
+			xtick={\empty}, 
+			xmin = -3,
+			xmax = 1,
+			ymin = -2,
+			ymax = 3,
+			]
+			\addplot[no marks] {parabola(x)};
+		\end{axis}
+		\node at (6.6,1.9){$-1+\frac{\sqrt{6}}{2}$};
+		\node at (0.3,1.9){$-1-\frac{\sqrt{6}}{2}$};
+		\node at (3.4,5.9){$3$};
+		
+	\end{tikzpicture}
+\end{document}

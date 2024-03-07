@@ -1,0 +1,120 @@
+% !TeX program = lualatex
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{cancel}
+\usepackage[portuguese]{babel}
+\usepackage{fancybox}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{polynom}
+\usepackage{adjustbox}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{matrix}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.pathreplacing}
+
+\tikzset{
+	CE/.style={column #1/.style={nodes={text width=43mm}}}
+}
+%\tikzset{
+	%	CA/.style={column #1/.style={nodes={text width=15mm}}}
+	%}
+
+\usepackage{luacode}
+\begin{luacode}
+	-- Computes the roots of x^2+bx+c=0
+	-- Returns nothing if they aren't real
+	function roots(b, c)
+	local delta = b*b-4*c
+	if delta > 0 then
+	deltasq = math.sqrt(delta)
+	local r1 = math.round((-b-deltasq)/2)
+	local r2 = math.round((-b+deltasq)/2)
+	return r1, r2
+	end
+	end
+	
+	-- Outputs x^2+bx+c in developed form to LaTeX
+	function display_polynome(b, c)
+	p = "x^2"
+	if b > 0 then
+	p = p .. "+" .. tostring(b) .. "x"
+	elseif b < 0 then
+	p = p .. tostring(b) .. "x"
+	end
+	if c > 0 then
+	p = p .. "+" .. tostring(c)
+	elseif c < 0 then
+	p = p .. tostring(c)
+	end
+	tex.print(p)
+	end
+	
+	-- Outputs x^2+bx+c in factorized form to LaTeX
+	function display_factorized_polynom(b, c) 
+	r1, r2 = roots(b, c)
+	p = "(x"
+	if r1 > 0 then
+	p = p .. "-" .. tostring(r1) .. ")(x"
+	elseif r1 < 0 then
+	p = p .. "+" .. tostring(-r1) .. ")(x"
+	end
+	if r2 > 0 then
+	p = p .. "-" .. tostring(r2) .. ")"
+	elseif r2 < 0 then
+	p = p .. "+" .. tostring(-r2) .. ")"
+	end
+	tex.print(p)
+	end
+\end{luacode}
+
+\begin{document}
+	\section*{Exercício 1}\textbf{Considere a função real, de variável real, definida por}
+	
+	\begin{center}
+		\textbf{$f(x) = 1 - 3^x$.}
+	\end{center}
+	\subsection*{a)}\textbf{Determine o domínio e o contradomínio de $\it{f}$.}
+	\[D_{f}=\mathbb{R}\]
+	\[D'_{f}= \left]-\infty,1\right[\]
+	\subsection*{b)}\textbf{Resolva, em $\mathbb{R}$, cada uma das seguintes condições:}
+	\begin{itemize}
+		\item[i)] \textbf{$f(x)=0$;}
+		\[1-3^x=0\]
+		\[\Leftrightarrow x=\log_{3}{1}\]
+		\[\Leftrightarrow x=0\]
+		\item[ii)] \textbf{$f(x)=-26$;}
+		\[1-3^x=-26\]
+		\[\Leftrightarrow x=\log_{3}{27}\]
+		\[\Leftrightarrow x=3\]
+		\item[iii)] \textbf{$f(x)<-8$.}
+		\[1-3^x<-8\]
+		\[\Leftrightarrow x>\log_{3}{9}\]
+		\[\Leftrightarrow x>2\]
+	\end{itemize}
+	\section*{Exercı́cio 2}\textbf{Resolva, em $\mathbb{R}$, cada uma das seguintes condições:}
+	
+	\subsection*{a)} \textbf{$x^2 \cdot 2^x - \frac{1}{4} \cdot 2^x =0$;}
+	\[2^x\left(x^2-\frac{1}{4}\right)=0\]
+	\[\underbrace{2^x=0}_{Impossível} \lor x=-\frac{1}{2} \lor x=\frac{1}{2}\]
+	\[C.S.=\{-\frac{1}{2},\frac{1}{2}\}\]
+	\subsection*{b)} \textbf{$3^{2-x} \leq 27^{-x}$;}
+	\[3^{2-x} \leq 3^{-3x}\]
+	\[x \leq -1\]
+	\[C.S.=\left]-\infty,-1\right[\]
+	
+\subsection*{c)} \textbf{$10^{x^2-3x} > 0.01$;}
+\[10^{x^2-3x} > 10^{-2}\]
+\[x^2-3x + 2 > 0\]
+\text{C.A.}
+\[x^2-3x + 2=0\]
+\[x =1 \lor x=2\]
+\[C.S.=\left]-\infty,1\right[\cup\left]2,+\infty\right[\]
+
+\end{document}

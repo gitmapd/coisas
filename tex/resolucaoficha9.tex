@@ -1,0 +1,370 @@
+% !TeX program = lualatex
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{cancel}
+\usepackage[portuguese]{babel}
+\usepackage{fancybox}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{polynom}
+\usepackage{adjustbox}
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{matrix}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.pathreplacing}
+
+\tikzset{
+	CE/.style={column #1/.style={nodes={text width=43mm}}}
+}
+%\tikzset{
+%	CA/.style={column #1/.style={nodes={text width=15mm}}}
+%}
+
+\usepackage{luacode}
+\begin{luacode}
+	-- Computes the roots of x^2+bx+c=0
+	-- Returns nothing if they aren't real
+	function roots(b, c)
+	local delta = b*b-4*c
+	if delta > 0 then
+	deltasq = math.sqrt(delta)
+	local r1 = math.round((-b-deltasq)/2)
+	local r2 = math.round((-b+deltasq)/2)
+	return r1, r2
+	end
+	end
+	
+	-- Outputs x^2+bx+c in developed form to LaTeX
+	function display_polynome(b, c)
+	p = "x^2"
+	if b > 0 then
+	p = p .. "+" .. tostring(b) .. "x"
+	elseif b < 0 then
+	p = p .. tostring(b) .. "x"
+	end
+	if c > 0 then
+	p = p .. "+" .. tostring(c)
+	elseif c < 0 then
+	p = p .. tostring(c)
+	end
+	tex.print(p)
+	end
+	
+	-- Outputs x^2+bx+c in factorized form to LaTeX
+	function display_factorized_polynom(b, c) 
+	r1, r2 = roots(b, c)
+	p = "(x"
+	if r1 > 0 then
+	p = p .. "-" .. tostring(r1) .. ")(x"
+	elseif r1 < 0 then
+	p = p .. "+" .. tostring(-r1) .. ")(x"
+	end
+	if r2 > 0 then
+	p = p .. "-" .. tostring(r2) .. ")"
+	elseif r2 < 0 then
+	p = p .. "+" .. tostring(-r2) .. ")"
+	end
+	tex.print(p)
+	end
+\end{luacode}
+
+\begin{document}
+	
+\section*{Exercício 1}\textbf{Resolva, em $\mathbb{R}$, cada uma das sequintes inequações:}
+	\subsection*{a)}\textbf{$x^3>x^2$}
+	
+	\text{C.A.}
+	\[x^3>x^2\]
+	\[\Leftrightarrow x^3-x^2>0\]
+	\[\Leftrightarrow x^2\left(x-1\right)>0\]
+	\[\Leftrightarrow x>0 \lor x>1\]
+	\[C.S=\left]1,+\infty\right[\]
+	
+\subsection*{b)}\textbf{$x^3+x^2-2x>0$}
+
+	\text{C.A.}
+\[x^3+x^2-2x=0\]
+\[\Leftrightarrow x\left(x^2+x-2\right)=0\]
+\[\Leftrightarrow x=0 \lor x=1 \lor x=-2\]
+\[C.S=\left]-2,0\right[\cup \left]1.+\infty\right[\]	
+	\begin{tikzpicture}
+		%\matrix[matrix of math nodes,
+		%nodes in empty cells,
+		%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+		%row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+		\matrix[matrix of math nodes,
+		nodes in empty cells,
+		nodes={text width=0.8cm,minimum height=8mm,anchor=north east, text centered}, 
+		row 1/.style={nodes={minimum height=5mm}},CE/.list={1}](S)
+		{
+			& & & & & & & & &  \\
+			& & & & & & & & & \\
+			& & & & & & & & & \\
+			& & & & & & & & & \\
+		};
+		\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-8.north east) |- cycle;
+		\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-4-8.south east);
+		\draw[ultra thick] (S-1-1.south west) -- (S-1-8.south east);
+		\draw (S-2-1.south west) -- (S-2-8.south east);
+		\draw (S-3-1.south west) -- (S-3-8.south east);
+		\foreach \i in{1,...,8}{
+			\draw (S-1-\i.north east) -- (S-4-\i.south east);
+			\node at (S-1-1) {$x$};
+			\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+			\node[anchor=east] at (S-1-8.east) {\(+\infty\)};
+			\node at (S-1-3) {\(-2\)};
+			\node at (S-1-5) {\(0\)};
+			\node at (S-1-7) {\(1\)};
+			\node at (S-2-1) {\(x\)};
+			\node at (S-3-1) {\(x^2+x-2\)};
+			\node at (S-4-1) {\(\left(x\right)\left(x^2+x-2\right)\)};
+			\node at (S-2-2) {\(-\)};
+			\node at (S-2-3) {\(-\)};
+			\node at (S-2-4) {\(-\)};
+			\node at (S-2-5) {\(0\)};
+			\node at (S-2-6) {\(+\)};
+			\node at (S-2-7) {\(+\)};
+			\node at (S-2-8) {\(+\)};
+			\node at (S-3-2) {\(+\)};
+			\node at (S-3-3) {\(0\)};
+			\node at (S-3-4) {\(-\)};
+			\node at (S-3-5) {\(-\)};
+			\node at (S-3-6) {\(-\)};
+			\node at (S-3-7) {\(0\)};
+			\node at (S-3-8) {\(+\)};
+			\node at (S-4-2) {\(-\)};
+			\node at (S-4-3) {\(0\)};
+			\node at (S-4-4) {\(+\)};
+			\node at (S-4-5) {\(0\)};
+			\node at (S-4-6) {\(-\)};
+			\node at (S-4-7) {\(0\)};
+			\node at (S-4-8) {\(+\)};
+		}
+		\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-3.south west) to node[midway,fill opacity=1,below]{Crescente} (S-4-5.south east);
+		\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-7.south west) to node[midway,fill opacity=1,below]{Crescente} (S-4-8.south east);
+	\end{tikzpicture}
+\subsection*{c)}\textbf{$\left(x-1\right)\left(4-x^2\right)\left(x^2-4x+6\right)\leq 0$}
+
+\text{C.A.}
+\[\left(x-1\right)\left(4-x^2\right)\left(x^2-4x+6\right)=0\]
+\[\Leftrightarrow x=1 \lor x=2 \lor x=-2 \lor x \in \emptyset \]
+\[C.S=\left[-2,1\right]\cup \left[2,+\infty\right[\]
+	
+\begin{tikzpicture}
+	%\matrix[matrix of math nodes,
+	%nodes in empty cells,
+	%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+	%row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	\matrix[matrix of math nodes,
+	nodes in empty cells,
+	nodes={text width=1cm,minimum height=8mm,anchor=north east, text centered}, 
+	row 1/.style={nodes={minimum height=5mm}},CE/.list={1}](S)
+	{
+		& & & & & & & & &  \\
+		& & & & & & & & & \\
+		& & & & & & & & & \\
+		& & & & & & & & & \\
+		& & & & & & & & & \\
+	};
+	\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-8.north east) |- cycle;
+	\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-5-8.south east);
+	\draw[ultra thick] (S-1-1.south west) -- (S-1-8.south east);
+	\draw (S-2-1.south west) -- (S-2-8.south east);
+	\draw (S-3-1.south west) -- (S-3-8.south east);
+	\draw (S-4-1.south west) -- (S-4-8.south east);
+	\draw (S-5-1.south west) -- (S-5-8.south east);
+	\foreach \i in{1,...,8}{
+		\draw (S-1-\i.north east) -- (S-5-\i.south east);
+		\node at (S-1-1) {$x$};
+		\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+		\node[anchor=east] at (S-1-8.east) {\(+\infty\)};
+		\node at (S-1-3) {\(-2\)};
+		\node at (S-1-5) {\(1\)};
+		\node at (S-1-7) {\(2\)};
+		\node at (S-2-1) {\(x-1\)};
+		\node at (S-3-1) {\(4-x^2\)};
+		\node at (S-4-1) {\(x^2-4x+6\)};
+		\node at (S-5-1) {\(\left(x-1\right)\left(4-x^2\right)\left(x^2-4x+6\right)\)};
+		\node at (S-2-2) {\(-\)};
+		\node at (S-2-3) {\(-\)};
+		\node at (S-2-4) {\(-\)};
+		\node at (S-2-5) {\(0\)};
+		\node at (S-2-6) {\(+\)};
+		\node at (S-2-7) {\(+\)};
+		\node at (S-2-8) {\(+\)};
+		\node at (S-3-2) {\(-\)};
+		\node at (S-3-3) {\(0\)};
+		\node at (S-3-4) {\(+\)};
+		\node at (S-3-5) {\(+\)};
+		\node at (S-3-6) {\(+\)};
+		\node at (S-3-7) {\(0\)};
+		\node at (S-3-8) {\(-\)};
+		\node at (S-4-2) {\(+\)};
+		\node at (S-4-3) {\(+\)};
+		\node at (S-4-4) {\(+\)};
+		\node at (S-4-5) {\(+\)};
+		\node at (S-4-6) {\(+\)};
+		\node at (S-4-7) {\(+\)};
+		\node at (S-4-8) {\(+\)};
+		\node at (S-5-2) {\(+\)};
+		\node at (S-5-3) {\(0\)};
+		\node at (S-5-4) {\(-\)};
+		\node at (S-5-5) {\(0\)};
+		\node at (S-5-6) {\(+\)};
+		\node at (S-5-7) {\(0\)};
+		\node at (S-5-8) {\(-\)};
+	}
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-5-3.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-5-5.south east);
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-5-7.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-5-8.south east);
+\end{tikzpicture}
+\section*{Exercı́cio 2}\textbf{Considere a função polinomial definida em $\mathbb{R}$ por $f(x) = x^3 - x^2 - 4x + 4$.}
+
+\subsection*{a)} \textbf{Usando a regra de Ruffini, mostre que $x^3 - x^2 - 4x + 4 = \left(x - 2\right) \left(x^2 + x - 2\right)$ , para todo $x \in \mathbb{R}$.}
+
+
+\polyhornerscheme[x=2]{x^3-x^2-4x+4}
+
+\subsection*{b)} \textbf{Determine os zeros de $\i{f}$.}
+\[\left(x - 2\right) \left(x^2 + x - 2\right)=0\]
+\[\Leftrightarrow x= 2 \lor x=-2 \lor x=1\]
+
+\subsection*{b)} \textbf{Determine o conjunto de números reais que verificam a condição $f(x)<0$.}
+
+
+\[\left(x - 2\right) \left(x^2 + x - 2\right)<0\]
+\[C.S=\left]-\infty,-2\right[\cup \left]1,2\right[\]
+
+\begin{tikzpicture}
+	%\matrix[matrix of math nodes,
+	%nodes in empty cells,
+	%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+	%row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	\matrix[matrix of math nodes,
+	nodes in empty cells,
+	nodes={text width=1cm,minimum height=8mm,anchor=north east, text centered}, 
+	row 1/.style={nodes={minimum height=5mm}},CE/.list={1}](S)
+	{
+		& & & & & & & & &  \\
+		& & & & & & & & & \\
+		& & & & & & & & & \\
+		& & & & & & & & & \\
+	};
+	\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-8.north east) |- cycle;
+	\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-4-8.south east);
+	\draw[ultra thick] (S-1-1.south west) -- (S-1-8.south east);
+	\draw (S-2-1.south west) -- (S-2-8.south east);
+	\draw (S-3-1.south west) -- (S-3-8.south east);
+	\foreach \i in{1,...,8}{
+		\draw (S-1-\i.north east) -- (S-4-\i.south east);
+		\node at (S-1-1) {$x$};
+		\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+		\node[anchor=east] at (S-1-8.east) {\(+\infty\)};
+		\node at (S-1-3) {\(-2\)};
+		\node at (S-1-5) {\(1\)};
+		\node at (S-1-7) {\(2\)};
+		\node at (S-2-1) {\(x-2\)};
+		\node at (S-3-1) {\(x^2+x-2\)};
+		\node at (S-4-1) {\(\left(x-2\right)\left(x^2+x-2\right)\)};
+		\node at (S-2-2) {\(-\)};
+		\node at (S-2-3) {\(-\)};
+		\node at (S-2-4) {\(-\)};
+		\node at (S-2-5) {\(-\)};
+		\node at (S-2-6) {\(-\)};
+		\node at (S-2-7) {\(0\)};
+		\node at (S-2-8) {\(+\)};
+		\node at (S-3-2) {\(+\)};
+		\node at (S-3-3) {\(0\)};
+		\node at (S-3-4) {\(-\)};
+		\node at (S-3-5) {\(0\)};
+		\node at (S-3-6) {\(+\)};
+		\node at (S-3-7) {\(+\)};
+		\node at (S-3-8) {\(+\)};
+		\node at (S-4-2) {\(-\)};
+		\node at (S-4-3) {\(0\)};
+		\node at (S-4-4) {\(+\)};
+		\node at (S-4-5) {\(0\)};
+		\node at (S-4-6) {\(-\)};
+		\node at (S-4-7) {\(0\)};
+		\node at (S-4-8) {\(+\)};;
+	}
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-2.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-4-3.south east);
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-5.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-4-7.south east);
+\end{tikzpicture}
+\section*{Exercício 3}\textbf{Considere o polinómio $p(x) = x^4 - 2x^3 - 2x^2 - 2x - 3$.}
+\subsection*{a)}\textbf{Mostre que $p(x)$ é divisı́vel por $(x + 1)(x - 3)$.}
+\[\polyhornerscheme[x=-1]{x^4-2x^3-2x^2-2x-3}\]
+
+\text{$\left(x+1\right)\left(x^3-3x^2+x-3\right)$}
+\[\polyhornerscheme[x=3]{x^3-3x^2+x-3}\]
+	\text{$\left(x+1\right)\left(x-3\right)\left(x^2+1\right)$}
+\subsection*{b)}\textbf{Resolva, em $\mathbb{R}$, a inequação $p(x) > 0$.}
+\[\text{$\left(x+1\right)\left(x-3\right)\left(x^2+1\right)>0$}\]
+
+\text{C.A.}
+\[\text{$\left(x+1\right)\left(x-3\right)\left(x^2+1\right)=0$}\]
+\[\Leftrightarrow x=-1 \lor x=3 \lor x \in \emptyset \]
+\[C.S=\left]-\infty,-1\right[\cup \left]3,+\infty\right[\]
+\begin{tikzpicture}
+	%\matrix[matrix of math nodes,
+	%nodes in empty cells,
+	%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+	%row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	\matrix[matrix of math nodes,
+	nodes in empty cells,
+	nodes={text width=1cm,minimum height=8mm,anchor=north east, text centered}, 
+	row 1/.style={nodes={minimum height=5mm}},CE/.list={1}](S)
+	{
+		& & & & & & & \\
+		& & & & & & & \\
+		& & & & & & & \\
+		& & & & & & & \\
+		& & & & & & & \\
+	};
+	\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-6.north east) |- cycle;
+	\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-5-6.south east);
+	\draw[ultra thick] (S-1-1.south west) -- (S-1-6.south east);
+	\draw (S-2-1.south west) -- (S-2-6.south east);
+	\draw (S-3-1.south west) -- (S-3-6.south east);
+	\draw (S-4-1.south west) -- (S-4-6.south east);
+	\foreach \i in{1,...,6}{
+		\draw (S-1-\i.north east) -- (S-5-\i.south east);
+		\node at (S-1-1) {$x$};
+		\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+		\node[anchor=east] at (S-1-6.east) {\(+\infty\)};
+		\node at (S-1-3) {\(-1\)};
+		\node at (S-1-5) {\(3\)};
+		\node at (S-2-1) {\(x+1\)};
+		\node at (S-3-1) {\(x-3\)};
+		\node at (S-4-1) {\(x^2+1\)};
+		\node at (S-5-1) {\(\left(x+1\right)\left(x-3\right)\left(x^2+1\right)\)};
+		\node at (S-2-2) {\(-\)};
+		\node at (S-2-3) {\(0\)};
+		\node at (S-2-4) {\(+\)};
+		\node at (S-2-5) {\(+\)};
+		\node at (S-2-6) {\(+\)};
+		\node at (S-3-2) {\(-\)};
+		\node at (S-3-3) {\(-\)};
+		\node at (S-3-4) {\(-\)};
+		\node at (S-3-5) {\(0\)};
+		\node at (S-3-6) {\(+\)};
+		\node at (S-4-2) {\(+\)};
+		\node at (S-4-3) {\(+\)};
+		\node at (S-4-4) {\(+\)};
+		\node at (S-4-5) {\(+\)};
+		\node at (S-4-6) {\(+\)};
+		\node at (S-5-2) {\(+\)};
+		\node at (S-5-3) {\(0\)};
+		\node at (S-5-4) {\(-\)};
+		\node at (S-5-5) {\(0\)};
+		\node at (S-5-6) {\(+\)};
+	}
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-5-2.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-5-3.south east);
+	\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-5-5.south west) to node[midway,fill opacity=1,below]{Decrescente} (S-5-6.south east);
+\end{tikzpicture}
+\end{document}
