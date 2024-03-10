@@ -1,0 +1,270 @@
+\documentclass{article}
+\usepackage{tkz-euclide}
+\usepackage{pgfplots}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usetikzlibrary{arrows.meta}
+\usepackage[utf8]{inputenc}
+\usepackage{cancel}
+\usepackage[portuguese]{babel}
+\usepackage{fancybox}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usetikzlibrary{calc}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.pathreplacing}
+
+%\tikzset{
+	%	CE/.style={column #1/.style={nodes={text width=24mm}}}
+	%}
+%\tikzset{
+	%	CA/.style={column #1/.style={nodes={text width=35mm}}}
+	%}
+\tikzset{
+	CE/.style={column #1/.style={nodes={text width=25mm}}}
+}
+\tikzset{
+	CA/.style={column #1/.style={nodes={text width=36mm}}}
+}
+
+\begin{document}
+	
+	\begin{tikzpicture}[vect/.style={->,>={Straight Barb[angle=60:2pt 3]}}]
+		\tkzInit[xmin=-6,xmax=6,ymin=-6,ymax=6]
+		\tkzDrawX[noticks,>=latex]
+		\tkzDrawY[noticks,>=latex]
+		\tkzDefPoint(0,0){O}
+		\tkzDefPoint(-2,-3){A}
+		\tkzDefPoint(-4,1){B}
+		\tkzDefPoint(-2,4){AB}
+		\tkzDefPoint(0,-4){R}
+		\tkzDefPoint(0,2){R2}
+		\tkzPointShowCoord[-,xlabel=$-2$,ylabel=$-3$,thin,gray,xstyle={below=4pt}](A)
+		\tkzPointShowCoord[-,xlabel=$-4$,ylabel=$1$,thin,gray,xstyle={below=4pt}](B)
+		\tkzDrawSegments[vect,color=blue,line width=1pt](A,B)
+		\tkzDrawSegments[vect,color=red,line width=1pt](O,R)
+		\tkzDrawSegments[vect,color=green,line width=1pt](O,R2)
+	\end{tikzpicture}
+
+\section*{Exercício 6}\textbf{Determine uma expressão geral das soluções reais da equação $-2\sin{x} -\sqrt{2} = 0$}
+
+\[-2\sin{x} -\sqrt{2} = 0\]
+
+\[\Leftrightarrow \sin{x}=-\frac{\sqrt{2}}{2}\]
+
+\[\Leftrightarrow \sin{x}=\sin(-\frac{\pi}{4})\]
+\[\Leftrightarrow x=-\frac{\pi}{4} + 2k\pi, k \in \mathbb{Z} \lor x=\pi-\frac{\pi}{4} + 2k\pi, k \in \mathbb{Z} \]
+\[\Leftrightarrow x=-\frac{\pi}{4}+ 2k\pi, k \in \mathbb{Z} \lor x=\frac{5\pi}{4}+ 2k\pi, k \in \mathbb{Z} \]
+
+\section*{Exercício 7}\textbf{Mostre, no domínio em que a expressão é válida, que:}
+
+\textbf{$\frac{\sin{x}\cdot \cos{x}}{\tan{x}} = \cos^2{x}$}
+\[\frac{\sin{x}\cdot \cos{x}}{\tan{x}} = \frac{\sin{x}\cdot \cos{x}}{\frac{\sin{x}}{\cos{x}}}=\frac{\cancel{\sin{x}}\cdot \cos^2{x}}{\cancel{\sin{x}}}=\cos^2{x}\]
+\text{Como queríamos demonstrar.}
+
+\section*{Exercício 8}\textbf{Resolva, em $\mathbb{R}$, a seguinte inequação fracionária:$\frac{-x + 1}{x^2+1}\geq 0$.}
+
+	\text{C.A.}
+
+	\[-x+1=0 \Leftrightarrow x = 1\]
+	\[\underbrace{x^2+1=0}_{Imposs\acute{i}vel}\]
+
+\begin{tikzpicture}
+	%\matrix[matrix of math nodes,
+	%nodes in empty cells,
+	%nodes={text width=2cm,minimum height=8mm,anchor=north east, text centered}, 
+	%row 1/.style={nodes={minimum height=5mm}},CE/.list={1,3,5}](S)
+	\matrix[matrix of math nodes,
+	nodes in empty cells,
+	nodes={text width=1cm,minimum height=8mm,anchor=north east, text centered}, 
+	row 1/.style={nodes={minimum height=5mm}},CE/.list={1}](S)
+	{
+		& & & & \\
+		& & & & \\
+		& & & & \\
+		& & & & \\
+	};
+	\fill[top color=brown!20,bottom color=brown!5,middle color=brown!5](S-1-1.south west) [rounded corners=1pt] |- (S-1-4.north east) |- cycle;
+	\draw[rounded corners=1pt] (S-1-1.north west) rectangle (S-4-4.south east);
+	\draw[ultra thick] (S-1-1.south west) -- (S-1-4.south east);
+	\draw (S-2-1.south west) -- (S-2-4.south east);
+	\draw (S-3-1.south west) -- (S-3-4.south east);
+	\foreach \i in{1,...,4}{
+		\draw (S-1-\i.north east) -- (S-4-\i.south east);
+	}
+	\node at (S-1-1) {$x$};
+	\node[anchor=west] at (S-1-2.west) {\(-\infty\)};
+	\node[anchor=east] at (S-1-4.east) {\(+\infty\)};
+
+	\foreach \i/\j in{3/\(1\)}{
+	\node[anchor=center] at (S-1-\i.center){\j};	
+	
+}
+\foreach \i/\j in{1/\(-x+1\),2/\(+\),3/\(0\),4/\(-\)}{
+	\node[anchor=center] at (S-2-\i.center){\j};	
+	
+}
+\foreach \i/\j in{1/\(x^2+1\),2/\(+\),3/\(+\),4/\(+\)}{
+	\node[anchor=center] at (S-3-\i.center){\j};	
+	
+}
+\foreach \i/\j in{1/\(\frac{-x+1}{x^2+1}\),2/\(+\),3/\(0\),4/\(-\)}{
+	\node[anchor=center] at (S-4-\i.center){\j};	
+	
+}
+\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-2.south west) to node[midway,fill opacity=1,below]{Crescente} (S-4-3.south east);
+%\draw[top color=red, fill opacity=.2, decorate,decoration={brace,mirror,amplitude=1.5mm}](S-4-4.south west) to node[midway,fill opacity=1,below]{Crescente} (S-4-5.south east);
+%\fill[pattern=north west lines] (S-2-2.north west) rectangle (S-4-2.south east);
+%\draw[->,>=stealth,shorten <=4mm,shorten >=4mm] (S-3-2.north west)--(S-3-2.south east);
+%\draw[->,>=stealth,shorten <=4mm,shorten >=4mm] (S-3-4.south west)--(S-3-4.north east);
+\end{tikzpicture}
+\[C.S=]-\infty,1]\]
+
+\section*{Exercício 9} \textbf{Seja $\left(u_{n}\right)_{n}$ uma sucessão definida por: $u_{n}=1 + \frac{n+1}{n}$}
+\subsection*{a)}
+\textbf{Verifique se $\frac{11}{5}$ é um dos termos de $\left(u_{n}\right)_{n}$}
+\[1 + \frac{n+1}{n}=\frac{11}{5}\]
+\[n=5 \in \mathbb{N}\]
+
+\subsection*{b)}
+\textbf{Estude $\left(u_{n}\right)_{n}$ quanto à monotonia}\\
+\\
+\text{$\left(u_{n+1}\right) - \left(u_{n}\right) < 0$ é monótona decrescente}\\
+\text{$\left(u_{n+1}\right) - \left(u_{n}\right) > 0$ é monótona crescente}
+\[\left[\frac{n}{n}\right]\left[\frac{2n+3}{n+1}\right] - \left[\frac{2n+1}{n}\right]\left[\frac{n+1}{n+1}\right] \]
+
+\[\frac{2n^2+3n}{\left(n+1\right)\left(n\right)} - \frac{2n^2+2n+n+1}{\left(n+1\right)\left(n\right)}\]
+
+\[\frac{2n^2+3n-2n^2-2n-n-1}{\left(n+1\right)\left(n\right)}\]
+
+\[\frac{-1}{\left(n+1\right)\left(n\right)}<0, \forall n \in \mathbb{N}\]
+\text{$u_{n}$ é monótona decrescente}
+
+
+\subsection*{c)}
+\textbf{Diga, justificando, se $\left(u_{n}\right)_{n}$ é uma sucessão convergente e se é uma sucessão limitada.}
+
+\[\lim\limits_{n}\ 1 + \frac{n+1}{n} =
+\lim\limits_{n} \ 1 + \lim\limits_{n} \ \frac{\cancel{n}\left(1+\frac{1}{n}\right)}{\cancel{n}\left(1\right)} = 1+\frac{1+ \cancelto{0}{\frac{1}{n}}}{1} = 2\]
+
+\text{$\left(u_{n}\right)_{n}$ é convergente pois tende para um número real. Toda a sucessão convergente é limitada.}
+
+\text{Como $\left(u_{n}\right)_{n}$ é decrescente sabemos que:}
+\[1 + \frac{n+1}{n}\]
+\[\frac{n+1}{n} > 0\]
+\[2 < u_{n} \leq 3, \forall n \in \mathbb{N} \]
+
+
+
+\begin{tikzpicture}[scale=1.5][master]
+	\begin{axis}[enlargelimits=0.1,]
+		\addplot+ [nodes near coords,only marks,point meta=explicit symbolic]
+		table [meta=label] {
+			x    y   label
+			1   3.0  $u_{1}$
+			2   2.5 $u_{2}$
+			3   2.33 $u_{3}$
+			4   2.25 $u_{4}$
+			5   2.2 $u_{5}$
+			6   2.16 $u_{6}$
+			7   2.14 $u_{7}$
+			8   2.125 $u_{8}$
+			9 2.111111111111111 $u_{9}$
+			10 2.1 $u_{10}$
+			11 2.090909090909091 $u_{11}$
+		};		
+		
+	\end{axis}
+\end{tikzpicture}
+
+\section*{Exercício 10}\textbf{Determine, caso existam, os seguintes limites:}
+\subsection*{a)}
+\[\lim\limits_{n}\ \frac{2n-5}{\sqrt{4n^2+1}}\overset{\mathrm{\frac{\infty}{\infty}}}{=}\]
+
+
+\[\lim\limits_{n}\ \frac{\cancel{n}\left(2+\cancelto{0}{\frac{5}{n}}\right)}{\cancel{n}\sqrt{4+\cancelto{0}{\frac{1}{n^2}}}}\]
+
+\[= \frac{2}{\sqrt{4+0}}=1\]
+
+\subsection*{b)}
+\[\lim\limits_{n}\ \left(\frac{n+1}{n-2}\right)^{3n}\overset{\mathrm{1^{\infty}}}{=}\]
+
+\[=\lim\limits_{n}\ \left(\frac{1+\frac{1}{n}}{1-\frac{2}{n}}\right)^{3n}\]
+
+\[=\left[\frac{\lim\limits_{n}\ \left(1+\cancelto{0}{\frac{1}{n}}\right)^n}{\lim\limits_{n}\ \left(1-\cancelto{0}{\frac{2}{n}}\right)^n}\right]^{3}\]
+
+
+\[=\left[\frac{e^{1}}{e^{-2}}\right]^{3}\]
+
+\[=e^{9}\]
+
+\section*{Exercício 11} \textbf{Na figura está representada parte de um gráfico de uma função $\it{f}$ de domínio $\mathbb{R}\setminus\{0\}$.}
+
+\begin{tikzpicture}[>=latex]
+	\begin{axis}[
+		axis x line=center,
+		axis y line=center,
+		xtick={-9,-8,-7,-6,-5,-4,...,5},
+		ytick={-7,-6,-5,-4,...,5},
+		xlabel={$x$},
+		ylabel={$y$},
+		xlabel style={below right},
+		ylabel style={above left},
+		xmin=-7,
+		xmax=5.5,
+		ymin=-7,
+		ymax=5.5]
+		\addplot[thick, smooth, domain=-6:-2] {-2*(\x + 4)^2+2} node[above left, sloped, pos = .05] {\(\rotatebox{-90}{f}\)};
+		\addplot[domain=-2:0]{-2};
+		\addplot[domain=0:5]{-2*(\x)+2};
+		\addplot[mark=*,fill=white] coordinates {(0,-2)};
+		\addplot[mark=*] coordinates {(-2,-2)};
+		\addplot[mark=*,fill=white] coordinates {(-2,-6)};;
+		\addplot[mark=*,fill=white] coordinates {(1,-1)};
+		\addplot[mark=*,fill=white] coordinates {(0,2)};
+		\draw[dashed] (axis cs:-4,0) -- (axis cs:-4,2) -- (axis cs:0,2);
+		\draw[dashed] (axis cs:-2,0) -- (axis cs:-2,-6);
+	\end{axis}
+\end{tikzpicture}
+
+\textbf{Indique:}
+\subsection*{a)}\textbf{$\lim_{x \to 0^{-}} f(x)$}
+\[\lim_{x \to 0^{-}} f(x)=-2\]
+\subsection*{b)}\textbf{$\lim_{x \to -2^{-}} f(x)$}
+\[\lim_{x \to -2^{-}} f(x)=-6\]
+
+\subsection*{c)}\textbf{$\lim_{x \to +\infty} f(x)$}
+\[\lim_{x \to +\infty} f(x)=-\infty\]
+
+\section*{Exercício 12}\textbf{Considere a função real, de variável real, definida por $f (x) = 10 - 2^{x - 1}$.}
+
+\subsection*{a)}\textbf{Determine o domínio e o contradomínio da função $\it{f}$.}
+\[D_{f}=\mathbb{R}\]
+\[D'_{f}=10-2^{x-1}<10=]-\infty,10[\]
+
+\subsection*{b)} \textbf{Caracterize a função inversa da função $\it{f}$ .}
+
+
+\[f^{-1}=\log_{2}(10-x)+1\]
+\[f^{-1}:]-\infty,10[\rightarrow \mathbb{R}\]
+\[x\rightarrowtail \log_{2}(10-x)+1\]
+\subsection*{c)} \textbf{Resolva em $\mathbb{R}$ a seguinte equação: $f(x) = -6$.}
+
+\[10-2^{x-1}=-6\]
+\[\Leftrightarrow 2^{x-1}=2^4\]
+\[\Leftrightarrow x=5\]
+
+\section*{Exercício 13}\textbf{Considere a função $\it{f}$ definida por $f(x) = -\frac{x^4}{4} + 2x^2$. Determine, na forma reduzida,a equação da reta tangente ao gráfico de $\it{f}$ no ponto de abcissa $1$.}
+
+\[f'(1)=4x-x^3=3\]
+\[f(1)=-\frac{1^4}{4}+2\cdot1^2=\frac{7}{4}\]
+\[y-f(1)=f'(1)\cdot(x-1)\]
+\[\Leftrightarrow y-\frac{7}{4}=3x-3\]
+\[\Leftrightarrow y=3x-\frac{5}{4}\]
+
+
+
+
+\end{document}
