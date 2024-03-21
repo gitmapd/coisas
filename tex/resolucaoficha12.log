@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.15.0 (TeX Live 2022/Debian)  (format=lualatex 2023.10.16)  10 MAR 2024 00:15
+This is LuaHBTeX, Version 1.15.0 (TeX Live 2022/Debian)  (format=lualatex 2023.10.16)  21 MAR 2024 15:10
  restricted system commands enabled.
 **resolucaoficha12.tex
 (./resolucaoficha12.tex
@@ -901,15 +901,18 @@ Overfull \hbox (109.1282pt too wide) in paragraph at lines 115--159
 [][] [] 
  []
 
-[2] [3] [4] (./resolucaoficha12.aux))
+[2]
+Missing character: There is no í (U+00ED) in font cmmi7!
+Missing character: There is no í (U+00ED) in font cmmi7!
+[3] [4] (./resolucaoficha12.aux))
 
 Here is how much of LuaTeX's memory you used:
  28331 strings out of 478382
  100000,1977958 words of node,token memory allocated
- 784 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 94 attribute, 53 glue_spec
-, 49 attribute_list, 2 write nodes
-   avail lists: 2:8924,3:2693,4:12,5:213,6:103,7:5591,8:46,9:2763,10:3,11:52
+ 796 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 5 glue, 4 kern, 1 glyph, 98 attribute, 53 glue_spec
+, 51 attribute_list, 2 write nodes
+   avail lists: 2:8918,3:2693,4:12,5:213,6:103,7:5591,8:46,9:2763,10:3,11:52
  47392 multiletter control sequences out of 65536+600000
  38 fonts using 2498359 bytes
  99i,15n,98p,728b,920s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -925,7 +928,7 @@ e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive
 dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on resolucaoficha12.pdf (4 pages, 104934 bytes).
+Output written on resolucaoficha12.pdf (4 pages, 106865 bytes).
 
 PDF statistics: 86 PDF objects out of 1000 (max. 8388607)
  57 compressed objects within 1 object stream
